@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-poppins: Poppins;
+  --font-inria-sans: "Inria Sans";
+
+  /* font sizes */
+  --font-size-45xl: 64px;
+  --font-size-13xl: 32px;
+  --font-size-11xl: 30px;
+  --font-size-xl: 20px;
+
+  /* Colors */
+  --color-whitesmoke-100: #f2f2f2;
+  --color-gray: #14274a;
+  --color-gainsboro: #d9d9d9;
+  --color-black: #000;
+
+  /* Gaps */
+  --gap-lg: 18px;
+  --gap-5xs: 8px;
+  --gap-3xs: 10px;
+
+  /* Paddings */
+  --padding-5xl: 24px;
+  --padding-4xl: 23px;
+  --padding-sm: 14px;
+  --padding-3xs: 10px;
+  --padding-11xs: 2px;
+  --padding-8xs: 5px;
+
+  /* Border radiuses */
+  --br-3xs: 10px;
+}
