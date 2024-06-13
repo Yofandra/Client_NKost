@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
-import DashboardPenyewa from "./pages/DashboardPenyewa";
+import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
 import Navbar from "./components/Navbar";
 
 function App() {
