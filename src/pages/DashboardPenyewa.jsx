@@ -1,6 +1,5 @@
 import "antd/dist/antd.min.css";
 import { Button } from "antd";
-import Header from "../components/Header";
 import "./DashboardPenyewa.css";
 
 const DashboardPenyewa = () => {
@@ -156,11 +155,10 @@ const DashboardPenyewa = () => {
           <p className="erat-et-lobortis">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vulputate condimentum `}</p>
           <p className="erat-et-lobortis">
             erat, et lobortis magna suscipit sit amet. Suspendisse malesuada et
-            ligula nec porttitor. 
+            ligula nec porttitor.
           </p>
         </div>
       </div>
-      <Header />
     </div>
   );
 };
