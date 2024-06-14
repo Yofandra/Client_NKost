@@ -6,6 +6,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
 import Navbar from "./components/Navbar";
+import Kamar from "./pages/penyewa/Kamar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard_penyewa" element={<DashboardPenyewa />} />
+        <Route path="/kamar" element={<Kamar />} />
       </Routes>
     </Router>
   );
