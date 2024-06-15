@@ -4,7 +4,7 @@ import leftArrow from "../../assets/images/left-arrow.png";
 import kamar from "../../assets/images/kamar.webp";
 import Navbar from "../../components/Navbar";
 
-const Kamar = () => {
+const PageKamar = () => {
   return (
     <>
       <Navbar />
@@ -34,4 +34,4 @@ const Kamar = () => {
   );
 };
 
-export default Kamar;
+export default PageKamar;
