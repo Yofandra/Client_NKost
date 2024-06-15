@@ -1,0 +1,365 @@
+.dashboard-penyewa-child {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  background-color: var(--color-gainsboro);
+  width: 1440px;
+  height: 164px;
+}
+.dashboard-penyewa-inner,
+.group-child {
+  position: absolute;
+  width: 427px;
+  height: 249px;
+}
+.group-child {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-3xs);
+  background-color: #595959;
+}
+.dashboard-penyewa-inner {
+  top: 146px;
+  left: 1760px;
+}
+.dashboard-penyewa-item {
+  position: absolute;
+  height: 2.54%;
+  width: 3.47%;
+  top: 4.95%;
+  right: 6.6%;
+  bottom: 92.51%;
+  left: 89.93%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.frame-div,
+.group-button {
+  position: absolute;
+  top: 164px;
+}
+.frame-div {
+  left: 66px;
+  width: 167px;
+  height: 67px;
+}
+.group-button {
+  right: 88px;
+}
+.dashboard-penyewa-child1 {
+  position: absolute;
+  top: 1199px;
+  right: 103px;
+}
+.dashboard-penyewa-child2 {
+  position: absolute;
+  top: 2285px;
+  right: 96px;
+}
+.group-icon {
+  position: absolute;
+  top: 255px;
+  left: 96px;
+  width: 771px;
+  height: 508px;
+  object-fit: cover;
+}
+.download-1-icon,
+.investasi-rumah-kos-dengan-car {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-3xs);
+  width: 422px;
+  height: 247px;
+  object-fit: cover;
+}
+.download-1-icon {
+  top: 260px;
+  width: 423px;
+  height: 248px;
+}
+.investasi-rumah-kos-dengan-car-parent {
+  position: absolute;
+  top: 255px;
+  left: 922px;
+  width: 423px;
+  height: 508px;
+}
+.electrical-storm-weather-symbo,
+.electrical-storm-weather-symbo-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+}
+.electrical-storm-weather-symbo-wrapper {
+  top: 1064px;
+  left: 93px;
+}
+.jlmanunggal-no169-gn,
+.kost-herman {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.jlmanunggal-no169-gn {
+  top: 36px;
+  font-size: var(--font-size-11xl);
+  font-weight: 300;
+  display: inline-block;
+  width: 650px;
+}
+.kost-herman-parent {
+  position: absolute;
+  top: 791px;
+  left: 85px;
+  width: 650px;
+  height: 108px;
+  font-size: 35px;
+}
+.image-32-icon,
+.review {
+  position: absolute;
+  top: 0;
+  left: 35px;
+}
+.image-32-icon {
+  top: 4px;
+  left: 0;
+  width: 27px;
+  height: 25px;
+  object-fit: cover;
+}
+.review-parent {
+  position: absolute;
+  top: 1216px;
+  left: 88px;
+  width: 216px;
+  height: 36px;
+  font-size: var(--font-size-11xl);
+}
+.frame-child {
+  width: 67px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-gainsboro);
+  height: 67px;
+  z-index: 0;
+}
+.image-36-icon {
+  width: 41px;
+  position: absolute;
+  margin: 0 !important;
+  top: 13px;
+  left: 13px;
+  height: 41px;
+  object-fit: cover;
+  z-index: 1;
+}
+.ellipse-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.namagmailcom {
+  position: relative;
+}
+.namagmailcom-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs);
+}
+.frame-wrapper {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) var(--padding-8xs);
+}
+.image-37-icon {
+  width: 26px;
+  position: relative;
+  height: 24px;
+  object-fit: cover;
+}
+.frame-container,
+.image-37-parent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.image-37-parent {
+  flex-direction: row;
+  gap: var(--gap-5xs);
+}
+.frame-container {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  flex-direction: column;
+  padding: var(--padding-sm) var(--padding-3xs);
+}
+.lorem-ipsum-dolor {
+  width: 671px;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.lorem-ipsum-dolor-sit-amet-co-wrapper {
+  border-radius: var(--br-3xs);
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xl) var(--padding-4xl);
+}
+.frame-group {
+  position: absolute;
+  top: 9px;
+  left: 87px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+}
+.frame-parent {
+  position: absolute;
+  top: 1312px;
+  left: 85px;
+  width: 804px;
+  height: 241px;
+}
+.frame-item {
+  width: 67px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-whitesmoke-100);
+  height: 67px;
+  z-index: 0;
+}
+.ellipse-group {
+  position: absolute;
+  top: 42px;
+  left: 1283px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.group-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gainsboro);
+  width: 1440px;
+  height: 164px;
+}
+.ellipse-container {
+  position: absolute;
+  top: 42px;
+  left: 1288px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.rectangle-parent {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  width: 1440px;
+  height: 164px;
+}
+.frame-parent2,
+.group-div,
+.group-inner {
+  position: absolute;
+  top: 1632px;
+  left: 85px;
+  width: 804px;
+  height: 241px;
+}
+.frame-parent2,
+.group-inner {
+  top: 1952px;
+}
+.group-inner {
+  top: 40px;
+  left: 0;
+  border-radius: var(--br-3xs);
+  background-color: var(--color-gainsboro);
+  width: 1260px;
+  height: 189px;
+}
+.frame-child2 {
+  width: 1158px;
+  border-radius: var(--br-3xs);
+  height: 72px;
+}
+.deskripsi-kost-parent,
+.frame-wrapper5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.deskripsi-kost-parent {
+  gap: 6px;
+}
+.frame-wrapper5 {
+  position: absolute;
+  top: 0;
+  left: 3px;
+}
+.rectangle-group {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1260px;
+  height: 229px;
+}
+.erat-et-lobortis {
+  margin: 0;
+}
+.group-parent,
+.lorem-ipsum-dolor-container {
+  position: absolute;
+  top: 85px;
+  left: 4px;
+}
+.group-parent {
+  top: 927px;
+  left: 85px;
+  width: 1260px;
+  height: 229px;
+  font-size: var(--font-size-11xl);
+}
+.dashboard-penyewa {
+  width: 100%;
+  position: relative;
+  background-color: #f7f7f7;
+  height: 2440px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-inria-sans);
+}
