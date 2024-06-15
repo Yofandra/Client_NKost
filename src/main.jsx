@@ -7,7 +7,8 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
-import Kamar from "./pages/penyewa/Kamar";
+import PageKamar from "./pages/penyewa/PageKamar";
+import PageLaporan from './pages/penyewa/PageLaporan';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +20,8 @@ ReactDOM.render(
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/penyewa/dashboard" element={<DashboardPenyewa />} />
-        <Route path="/penyewa/kamar" element={<Kamar />} />
+        <Route path="/penyewa/kamar" element={<PageKamar />} />
+        <Route path="/penyewa/laporan" element={<PageLaporan />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
