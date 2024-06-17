@@ -10,7 +10,7 @@ const GroupComponent1 = ({ className = "", propTop }) => {
 
   return (
     <div
-      className={`absolute top-[1312px] left-[85px] w-[804px] h-[241px] text-left text-xl text-black font-inria-sans ${className}`}
+      className={`absolute top-[1276px] left-[85px] w-[804px] h-[241px] text-left text-xl text-black font-inria-sans ${className}`}
       style={groupDivStyle}
     >
       <div className="absolute top-[0px] left-[0px] flex flex-row items-start justify-start gap-[10px]">
