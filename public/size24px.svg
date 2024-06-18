@@ -1,0 +1,29 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1_19)">
+<line y1="-0.05" x2="33.9411" y2="-0.05" transform="matrix(-0.707107 0.707107 0.707107 0.707107 24 0)" stroke="#9B51E0" stroke-width="0.1"/>
+<line x1="0.0353553" y1="-0.0353553" x2="24.0354" y2="23.9646" stroke="#9B51E0" stroke-width="0.1"/>
+<circle cx="10" cy="10" r="10" transform="matrix(-1 0 0 1 22 2)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="18" height="18" transform="matrix(-1 0 0 1 21 3)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="20" height="16" transform="matrix(-1 0 0 1 22 4)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="20" height="16" transform="matrix(4.37114e-08 1 1 -4.37114e-08 4 2)" stroke="#9B51E0" stroke-width="0.1"/>
+<path d="M3 20.1089H5.13826V3.89112H3V2H14.0273C15.2696 2 16.3387 2.12416 17.2347 2.37249C18.1308 2.60172 18.8639 2.92646 19.4341 3.34671C20.0247 3.76695 20.4523 4.26361 20.717 4.83668C21.0021 5.40974 21.1447 6.03056 21.1447 6.69914C21.1447 7.38682 21.0123 7.99809 20.7476 8.53295C20.5032 9.06781 20.1672 9.52627 19.7396 9.90831C19.3119 10.2713 18.813 10.5769 18.2428 10.8252C17.6929 11.0735 17.1227 11.255 16.5322 11.3696V11.5129C17.1431 11.5893 17.7744 11.7421 18.426 11.9713C19.0777 12.2006 19.6683 12.5158 20.1977 12.9169C20.7272 13.3181 21.1549 13.8147 21.4807 14.4069C21.8269 14.9799 22 15.6581 22 16.4413C22 18.2178 21.3891 19.5931 20.1672 20.5673C18.9453 21.5224 17.1024 22 14.6383 22H3V20.1089ZM10.0868 19.9656H13.4775C14.5772 19.9656 15.4223 19.7077 16.0129 19.192C16.6238 18.6762 16.9293 17.9503 16.9293 17.0143V15.6676C16.9293 14.7316 16.6238 14.0057 16.0129 13.49C15.4223 12.9742 14.5772 12.7163 13.4775 12.7163H10.0868V19.9656ZM10.0868 10.7393H12.9277C15.0252 10.7393 16.074 9.8319 16.074 8.01719V6.75645C16.074 4.94174 15.0252 4.03438 12.9277 4.03438H10.0868V10.7393Z" fill="white"/>
+<g clip-path="url(#clip1_1_19)">
+<line y1="-0.05" x2="33.9411" y2="-0.05" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 24 24)" stroke="#9B51E0" stroke-width="0.1"/>
+<line x1="24.0354" y1="0.0353553" x2="0.0353568" y2="24.0354" stroke="#9B51E0" stroke-width="0.1"/>
+<circle cx="10" cy="10" r="10" transform="matrix(0 -1 -1 0 22 22)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="18" height="18" transform="matrix(0 -1 -1 0 21 21)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="20" height="16" transform="matrix(0 -1 -1 0 20 22)" stroke="#9B51E0" stroke-width="0.1"/>
+<rect width="20" height="16" transform="matrix(-1 4.37114e-08 4.37114e-08 1 22 4)" stroke="#9B51E0" stroke-width="0.1"/>
+<path d="M9 20L14.1716 14.8284C15.5049 13.4951 16.1716 12.8284 16.1716 12C16.1716 11.1716 15.5049 10.5049 14.1716 9.17158L9 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 20L14.1716 14.8284C15.5049 13.4951 16.1716 12.8284 16.1716 12C16.1716 11.1716 15.5049 10.5049 14.1716 9.17158L9 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1_19">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+<clipPath id="clip1_1_19">
+<rect width="24" height="24" fill="white" transform="matrix(0 1 -1 0 24 0)"/>
+</clipPath>
+</defs>
+</svg>
