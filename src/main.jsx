@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
 import PageKamar from "./pages/penyewa/PageKamar";
 import PageLaporan from './pages/penyewa/PageLaporan';
+import PageDaftarKost from './pages/penyewa/PageDaftarKost';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="/penyewa/dashboard" element={<DashboardPenyewa />} />
         <Route path="/penyewa/kamar" element={<PageKamar />} />
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
+        <Route path="/penyewa/daftar/kost" element={<PageDaftarKost />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
