@@ -10,6 +10,7 @@ import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
 import PageKamar from "./pages/penyewa/PageKamar";
 import PageLaporan from './pages/penyewa/PageLaporan';
 import PageDaftarKost from './pages/penyewa/PageDaftarKost';
+import PageSewaKamar from './pages/penyewa/PageSewaKamar';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path="/penyewa/kamar" element={<PageKamar />} />
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
         <Route path="/penyewa/daftar/kost" element={<PageDaftarKost />} />
+        <Route path="/penyewa/sewa/kamar" element={<PageSewaKamar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
