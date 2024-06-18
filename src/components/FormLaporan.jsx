@@ -20,13 +20,13 @@ const FormLaporan = () => {
   };
 
   return (
-    <div className="bg-[#D9D9D9] bg-opacity-30 w-full p-3 my-8">
+    <div className="bg-[#D9D9D9] bg-opacity-30 w-full p-3 my-8 text-black">
       <p className="p-0 m-0 bg-transparent">15/06/2024</p>
       {isEditing ? (
         <>
           <div className="bg-[#D9D9D9] rounded-md py-3 px-1">
             <textarea
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 border rounded-md  "
               value={content}
               onChange={handleContentChange}
             />

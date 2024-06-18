@@ -20,7 +20,7 @@ const PageKamar = () => {
         </div>
         <p className="font-bold my-5">Kamar Single</p>
         <p className="font-bold">Deskripsi Kamar</p>
-        <div className="w-full bg-[#D9D9D9] rounded-md py-2 my-2">
+        <div className="w-full bg-[#D9D9D9] text-black rounded-md p-2 my-2">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, qui
           recusandae? Expedita nulla voluptatibus sequi, placeat voluptatum
           accusamus impedit eaque cupiditate corporis minus eligendi,

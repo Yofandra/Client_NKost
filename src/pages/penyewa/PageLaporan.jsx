@@ -16,7 +16,7 @@ const PageLaporan = () => {
           <p className="text-[#444F06] ml-5">Laporan Saya</p>
         </div>
         <FormLaporan />
-        <form className="flex flex-col bg-[#D9D9D9] bg-opacity-30 w-full p-3 my-10">
+        <form className="flex flex-col bg-[#D9D9D9] bg-opacity-30 w-full p-3 my-10 text-black">
             <label className="bg-transparent font-bold mb-2">Buat Laporan</label>
             <input className=" bg-[#D9D9D9] rounded-md py-3 px-1">
             </input>
