@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
+import gambarKost from "../../assets/images/kost.png";
 
 const DashboardPenyewa = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -19,7 +20,7 @@ const DashboardPenyewa = () => {
             <h1 className="text-3xl text-black pb-6">Dashboard</h1>
 
             <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-              <i className="fas fa-plus mr-3"></i> New Kost
+              <i className="fas fa-plus mr-3"></i> Tambah Kost
             </button>
 
             <div className="w-full mt-12">
@@ -52,16 +53,16 @@ const DashboardPenyewa = () => {
                   </thead>
                   <tbody>
                     {[
-                      { id: 1, name: "Kost A", category: "Category 1", action: "Edit", location: "Location A" },
-                      { id: 2, name: "Kost B", category: "Category 2", action: "Edit", location: "Location B" },
-                      { id: 3, name: "Kost C", category: "Category 3", action: "Edit", location: "Location C" },
-                      { id: 4, name: "Kost D", category: "Category 4", action: "Edit", location: "Location D" }
+                      { id: 1, name: "Kost A",  deskripsi: " deskripsi 1", gambar: "Edit", location: "Location A" },
+                      { id: 2, name: "Kost B",  deskripsi: " deskripsi 2", gambar: "Edit", location: "Location B" },
+                      { id: 3, name: "Kost C",  deskripsi: " deskripsi 3", gambar: "Edit", location: "Location C" },
+                      { id: 4, name: "Kost D",  deskripsi: " deskripsi 4", gambar: "Edit", location: "Location D" }
                     ].map(item => (
                       <tr key={item.id} className="hover:bg-grey-lighter ">
                         <td className="py-4 px-6 border-b border-grey-light">{item.id}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.name}</td>
-                        <td className="py-4 px-6 border-b border-grey-light">{item.category}</td>
-                        <td className="py-4 px-6 border-b border-grey-light">{item.action}</td>
+                        <td className="py-4 px-6 border-b border-grey-light">{item.deskripsi}</td>
+                        <td className="py-4 px-6 border-b border-grey-light"><img src={gambarKost} alt="" /></td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.location}</td>
                         <td className="py-4 px-6 border-b border-grey-light">
                         <button className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
