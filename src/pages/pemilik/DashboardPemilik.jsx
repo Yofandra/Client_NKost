@@ -19,6 +19,10 @@ const DashboardPenyewa = () => {
     const handleCreateClick = () => {
         navigate('/pemilik/tambah-kost');
     }
+    
+    const handleLocationClick = () => {
+        navigate('/pemilik/detail-lokasi');
+    }
   return (
     <div className="bg-gray-100 font-family-karla flex text-black">
     <SidebarPemilik />
@@ -72,7 +76,7 @@ const DashboardPenyewa = () => {
                         <td className="py-4 px-6 border-b border-grey-light">{item.name}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.deskripsi}</td>
                         <td className="py-4 px-6 border-b border-grey-light"><img src={gambarKost} alt="" /></td>
-                        <td className="py-4 px-6 border-b border-grey-light"><button className="bg-[#F39200] w-28 p-0">Detail Lokasi</button></td>
+                        <td className="py-4 px-6 border-b border-grey-light"><button onClick={(e) => { e.stopPropagation(); handleLocationClick(item.id); }} className="bg-[#F39200] w-28 p-0">Detail Lokasi</button></td>
                         <td className="py-4 px-6 border-b border-grey-light">
                         <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
                         <button className="bg-[#F39200] w-24 font-bold">Hapus</button>

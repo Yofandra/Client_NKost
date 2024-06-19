@@ -37,7 +37,7 @@ const EditKamar = () => {
                                 <input type="file" id="uploadFoto" name="uploadFoto" className="border-2 rounded-lg p-2 file:bg-[#F39200] file:text-white file:font-bold file:py-2 file:px-4 file:rounded-lg file:border-none"/>
                             </div>
                             <div className="flex justify-center">
-                                <button type="submit" className="bg-[#F39200] text-white font-bold py-2 px-4 rounded-lg">Update Room</button>
+                                <button type="submit" className="bg-[#F39200] text-white font-bold py-2 px-4 rounded-lg">Update Kamar</button>
                             </div>
                         </form>
                     </main>
