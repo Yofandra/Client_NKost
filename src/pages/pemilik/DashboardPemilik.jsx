@@ -27,7 +27,7 @@ const DashboardPenyewa = () => {
                 <i className="fas fa-list mr-3"></i> My Kost
               </p>
               <div className="bg-white overflow-auto">
-                <table className="text-left w-full border-collapse">
+                <table className="text-center w-full border-collapse ">
                   <thead>
                     <tr>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
@@ -37,13 +37,16 @@ const DashboardPenyewa = () => {
                         Nama Kost
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        Kategori
+                        Deskripsi
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        Aksi
+                        Gambar
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         Lokasi
+                      </th>
+                      <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                        Aksi
                       </th>
                     </tr>
                   </thead>
@@ -54,12 +57,16 @@ const DashboardPenyewa = () => {
                       { id: 3, name: "Kost C", category: "Category 3", action: "Edit", location: "Location C" },
                       { id: 4, name: "Kost D", category: "Category 4", action: "Edit", location: "Location D" }
                     ].map(item => (
-                      <tr key={item.id} className="hover:bg-grey-lighter">
+                      <tr key={item.id} className="hover:bg-grey-lighter ">
                         <td className="py-4 px-6 border-b border-grey-light">{item.id}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.name}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.category}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.action}</td>
                         <td className="py-4 px-6 border-b border-grey-light">{item.location}</td>
+                        <td className="py-4 px-6 border-b border-grey-light">
+                        <button className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
+                        <button className="bg-[#F39200] w-24 font-bold">Hapus</button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
