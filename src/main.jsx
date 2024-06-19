@@ -20,6 +20,7 @@ import EditKamar from './pages/pemilik/EditKamar';
 import DetailKost from './pages/pemilik/DetailKost';
 import EditKost from './pages/pemilik/EditKost';
 import TambahKost from './pages/pemilik/TambahKost';
+import DetailLokasi from './pages/pemilik/DetailLokasi';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path="/pemilik/detail-kost" element={<DetailKost />} />
         <Route path="/pemilik/edit-kost" element={<EditKost />} />
         <Route path="/pemilik/tambah-kost" element={<TambahKost />} />
+        <Route path="/pemilik/detail-lokasi" element={<DetailLokasi />} />
         <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
         <Route path="/pemilik/daftar-kost" element={<DaftarKost />} />
         <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
