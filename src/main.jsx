@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './main.css'
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -11,6 +12,14 @@ import PageKamar from "./pages/penyewa/PageKamar";
 import PageLaporan from './pages/penyewa/PageLaporan';
 import PageDaftarKost from './pages/penyewa/PageDaftarKost';
 import PageSewaKamar from './pages/penyewa/PageSewaKamar';
+import DashboardPemilik from './pages/pemilik/DashboardPemilik';
+import KelolaKamar from './pages/pemilik/KelolaKamar';
+import DaftarKost from './pages/pemilik/DaftarKost';
+import DetailKamar from './pages/pemilik/DetailKamar';
+import EditKamar from './pages/pemilik/EditKamar';
+import DetailKost from './pages/pemilik/DetailKost';
+import EditKost from './pages/pemilik/EditKost';
+import TambahKost from './pages/pemilik/TambahKost';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,6 +35,14 @@ ReactDOM.render(
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
         <Route path="/penyewa/daftar/kost" element={<PageDaftarKost />} />
         <Route path="/penyewa/sewa/kamar" element={<PageSewaKamar />} />
+        <Route path="/pemilik/dashboard" element={<DashboardPemilik />} />
+        <Route path="/pemilik/detail-kost" element={<DetailKost />} />
+        <Route path="/pemilik/edit-kost" element={<EditKost />} />
+        <Route path="/pemilik/tambah-kost" element={<TambahKost />} />
+        <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
+        <Route path="/pemilik/daftar-kost" element={<DaftarKost />} />
+        <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
+        <Route path="/pemilik/edit-kamar" element={<EditKamar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

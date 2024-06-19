@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import leftArrow from "../../assets/images/left-arrow.png";
 import kamar from "../../assets/images/kamar.webp";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NavbarPenyewa";
 
 const PageKamar = () => {
   return (
     <>
       <Navbar />
-      <div className="px-32 py-0 bg-[#F7F7F7] w-screen h-screen">
+      <div className="px-32 bg-[#F7F7F7] w-screen h-screen my-0">
         <div className="flex my-6">
           <a href="">
             <img src={leftArrow} alt="" />
