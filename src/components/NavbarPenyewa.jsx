@@ -18,7 +18,7 @@ const NavbarPenyewa = () => {
             <button
               onClick={toggleDropdown}
               className="flex justify-center relative z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-              <i class="fa-solid fa-user fa-2x"></i>
+              <i className="fa-solid fa-user fa-2x"></i>
             </button>
             {isDropdownOpen && (
               <div
