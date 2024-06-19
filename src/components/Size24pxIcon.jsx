@@ -40,7 +40,6 @@ Size24pxIcon.propTypes = {
   className: PropTypes.string,
   size24pxIconSize24px: PropTypes.string,
 
-  /** Style props */
   size24pxIconWidth: PropTypes.any,
   size24pxIconHeight: PropTypes.any,
   size24pxIconPosition: PropTypes.any,
