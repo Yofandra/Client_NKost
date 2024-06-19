@@ -25,16 +25,16 @@ const KelolaKamar = () => {
             <SidebarPemilik />
             <div className="w-full flex flex-col h-screen overflow-y-hidden">
                 <NavbarPemilik/>
-                <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
-                    <main class="w-full flex-grow p-6">
-                        <i onClick={handleBackClick} class="fa-solid fa-arrow-left fa-2x mb-4"></i>
-                        <h1 class="text-3xl text-black pb-6 font-bold">Kelola Kamar</h1>
+                <div className="w-full h-screen overflow-x-hidden border-t flex flex-col">
+                    <main className="w-full flex-grow p-6">
+                        <i onClick={handleBackClick} className="fa-solid fa-arrow-left fa-2x mb-4"></i>
+                        <h1 className="text-3xl text-black pb-6 font-bold">Kelola Kamar</h1>
                         <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                     <i className="fas fa-plus mr-3"></i> Tambah Kamar
                     </button>
-                        <div class="w-full mt-12">
-                            <div class="bg-white overflow-auto">
-                                <table class="text-center w-full border-collapse">
+                        <div className="w-full mt-12">
+                            <div className="bg-white overflow-auto">
+                                <table className="text-center w-full border-collapse">
                                     <thead>
                                         <tr>
                                         <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
