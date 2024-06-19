@@ -11,7 +11,10 @@ import DashboardPenyewa from "./pages/penyewa/DashboardPenyewa";
 import PageKamar from "./pages/penyewa/PageKamar";
 import PageLaporan from './pages/penyewa/PageLaporan';
 import DashboardPemilik from './pages/pemilik/DashboardPemilik';
-import PageKelolaKamar from './pages/pemilik/PageKelolaKamar';
+import KelolaKamar from './pages/pemilik/KelolaKamar';
+import DaftarKost from './pages/pemilik/DaftarKost';
+import DetailKamar from './pages/pemilik/DetailKamar';
+import EditKamar from './pages/pemilik/EditKamar';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,7 +29,10 @@ ReactDOM.render(
         <Route path="/penyewa/kamar" element={<PageKamar />} />
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
         <Route path="/pemilik/dashboard" element={<DashboardPemilik />} />
-        <Route path="/pemilik/kelola-kamar" element={<PageKelolaKamar />} />
+        <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
+        <Route path="/pemilik/daftar-kost" element={<DaftarKost />} />
+        <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
+        <Route path="/pemilik/edit-kamar" element={<EditKamar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

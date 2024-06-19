@@ -74,6 +74,13 @@ td {
   white-space: nowrap; 
 }
 
+.truncate{
+  max-width: 250px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
