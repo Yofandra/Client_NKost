@@ -3,7 +3,6 @@ import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
 import gambarKost from "../../assets/images/kost.png";
 import { useNavigate } from "react-router-dom";
-import TambahKost from "./TambahKost";
 
 const DashboardPenyewa = () => {
     let navigate = useNavigate();
