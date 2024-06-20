@@ -1,5 +1,5 @@
 import Size24pxIcon from "../../components/Size24pxIcon";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NavbarPenyewa";
 
 const DashboardBelumMenyewa = () => {
   return (
