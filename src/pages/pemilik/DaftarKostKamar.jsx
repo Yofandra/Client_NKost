@@ -6,7 +6,7 @@ import gambarKost from '../../assets/images/kost.png';
 import {useNavigate} from 'react-router-dom';
 
 
-const DaftarKost = () => {
+const DaftarKostKamar = () => {
     
     let navigate = useNavigate();
 
@@ -39,4 +39,4 @@ const DaftarKost = () => {
     )
 }
 
-export default DaftarKost;
+export default DaftarKostKamar;

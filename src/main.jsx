@@ -14,13 +14,17 @@ import PageDaftarKost from './pages/penyewa/PageDaftarKost';
 import PageSewaKamar from './pages/penyewa/PageSewaKamar';
 import DashboardPemilik from './pages/pemilik/DashboardPemilik';
 import KelolaKamar from './pages/pemilik/KelolaKamar';
-import DaftarKost from './pages/pemilik/DaftarKost';
+import DaftarKostKamar from './pages/pemilik/DaftarKostKamar';
 import DetailKamar from './pages/pemilik/DetailKamar';
 import EditKamar from './pages/pemilik/EditKamar';
 import DetailKost from './pages/pemilik/DetailKost';
 import EditKost from './pages/pemilik/EditKost';
 import TambahKost from './pages/pemilik/TambahKost';
 import DetailLokasi from './pages/pemilik/DetailLokasi';
+import Laporan from './pages/pemilik/Laporan';
+import DaftarKostPenilaian from './pages/pemilik/DaftarKostPenilaian';
+import Penilaian from './pages/pemilik/Penilaian';
+import PermintaanKamar from './pages/pemilik/PermintaanKamar';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -42,9 +46,13 @@ ReactDOM.render(
         <Route path="/pemilik/tambah-kost" element={<TambahKost />} />
         <Route path="/pemilik/detail-lokasi" element={<DetailLokasi />} />
         <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
-        <Route path="/pemilik/daftar-kost" element={<DaftarKost />} />
+        <Route path="/pemilik/daftar-kost-kamar" element={<DaftarKostKamar />} />
         <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
         <Route path="/pemilik/edit-kamar" element={<EditKamar />} />
+        <Route path="/pemilik/laporan" element={<Laporan />} />
+        <Route path="/pemilik/daftar-kost-penilaian" element={<DaftarKostPenilaian />} />
+        <Route path="/pemilik/penilaian" element={<Penilaian />} />
+        <Route path="/pemilik/permintaan-kamar" element={<PermintaanKamar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

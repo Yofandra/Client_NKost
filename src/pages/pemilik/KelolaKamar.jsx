@@ -9,7 +9,7 @@ const KelolaKamar = () => {
     let navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate('/pemilik/daftar-kost');
+        navigate('/pemilik/daftar-kost-kamar');
     }
 
     const handleDetailClick = () => {
