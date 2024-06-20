@@ -12,6 +12,7 @@ import PageKamar from "./pages/penyewa/PageKamar";
 import PageLaporan from './pages/penyewa/PageLaporan';
 import PageDaftarKost from './pages/penyewa/PageDaftarKost';
 import PageSewaKamar from './pages/penyewa/PageSewaKamar';
+import DashboardBelumMenyewa from './pages/penyewa/DashboardBelumMenyewa';
 import DashboardPemilik from './pages/pemilik/DashboardPemilik';
 import KelolaKamar from './pages/pemilik/KelolaKamar';
 import DaftarKostKamar from './pages/pemilik/DaftarKostKamar';
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
         <Route path="/penyewa/daftar/kost" element={<PageDaftarKost />} />
         <Route path="/penyewa/sewa/kamar" element={<PageSewaKamar />} />
+        <Route path="/penyewa/dashboard/belum/menyewa" element={<DashboardBelumMenyewa />} />
         <Route path="/pemilik/dashboard" element={<DashboardPemilik />} />
         <Route path="/pemilik/detail-kost" element={<DetailKost />} />
         <Route path="/pemilik/edit-kost" element={<EditKost />} />
