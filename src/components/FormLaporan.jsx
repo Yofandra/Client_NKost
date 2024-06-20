@@ -26,7 +26,7 @@ const FormLaporan = () => {
         <>
           <div className="bg-[#D9D9D9] rounded-md py-3 px-1">
             <textarea
-              className="w-full p-2 border rounded-md  "
+              className="w-full p-2 border rounded-md bg-[#D9D9D9] "
               value={content}
               onChange={handleContentChange}
             />
