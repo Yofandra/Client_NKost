@@ -1,6 +1,6 @@
 import Size24pxIcon from "../../components/Size24pxIcon";
 import ListKost from "../../components/ListKost";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NavbarPenyewa";
 
 const PageDaftarKost = () => {
   return (
