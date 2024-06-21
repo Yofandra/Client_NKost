@@ -1,10 +1,29 @@
 import React, {useState} from "react";
+import { useNavigate, Link } from "react-router-dom";
+import Swal from "../utils/sweetAlert";
 
 const NavbarPemilik = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
+    };
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      Swal.fire({
+        title: "Logout Berhasil",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      localStorage.removeItem("token");
+  
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
     };
     return(
         <div className="w-full items-center bg-white py-2 px-6 hidden sm:flex">
@@ -23,12 +42,12 @@ const NavbarPemilik = () => {
             )}
             {isDropdownOpen && (
               <div className="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-                <a href="#" className="block px-4 py-2 account-link text-black hover:text-white">
+                <Link to={"pemilik/dashboard"} className="block px-4 py-2 account-link text-black hover:text-white">
                   Profile
-                </a>
-                <a href="#" className="block px-4 py-2 account-link text-black hover:text-white">
+                </Link>
+                <button onClick={handleLogout} className="flex justify-start px-4 py-2 account-link bg-white w-full text-black hover:text-white">
                   Sign Out
-                </a>
+                </button>
               </div>
             )}
           </div>

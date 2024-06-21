@@ -1,30 +1,40 @@
 import React, { useState } from "react";
 import illustration from "../assets/images/2.png";
+import api from "../axios/api";
+import Swal from "../utils/sweetAlert";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const onFinish = async (event) => {
+    event.preventDefault();
     try {
-      const response = await fetch("https://localhost:4000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await api.post("/user/login", {
+        email,
+        password,
       });
 
-      if (!response.ok) {
-        throw new Error("Login gagal");
-      }
+      Swal.fire({
+        title: "Login Berhasil",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
-      const data = await response.json();
-      console.log("Login berhasil:", data);
+      localStorage.setItem("token", response.data.token);
+      setTimeout(() => {
+        navigate("/pemilik/dashboard");
+      }, 1500);
     } catch (error) {
-      setError(error.message);
+      Swal.fire({
+        title: "Login Gagal",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 
@@ -41,25 +51,28 @@ const Login = () => {
         <h2 className="text-2xl text-center text-orange-400 font-bold mb-9">
           LOGIN
         </h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-        <form onSubmit={handleLogin}>
+        <form onSubmit={onFinish}>
           <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             className="w-full p-3 border rounded-lg mb-4"
+            required
           />
           <input
+            name="password"
             type="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
             className="w-full p-3 border rounded-lg mb-4"
+            required
           />
-          <a href="/forgot-password" className="text-orange-500 block mb-4">
+          <Link to="/forgot-password" className="text-orange-500 block mb-4">
             Lupa Password?
-          </a>
+          </Link>
           <button
             type="submit"
             className="w-full bg-orange-500 text-white py-3 rounded-lg"
@@ -69,9 +82,9 @@ const Login = () => {
         </form>
         <p className="mt-4 text-center">
           Belum punya akun?{" "}
-          <a href="/register" className="text-orange-500">
+          <Link to="/register" className="text-orange-500">
             Registrasi
-          </a>
+          </Link>
         </p>
       </div>
     </div>
