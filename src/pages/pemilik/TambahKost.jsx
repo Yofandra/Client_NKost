@@ -1,14 +1,9 @@
 import React, {useState} from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TambahKost = () => {
-    let navigate = useNavigate();
-
-    const handleBackClick = () => {
-        navigate('/pemilik/dashboard');
-    }
 
     return(
         <div className="bg-gray-100 font-family-karla flex text-black">
@@ -17,7 +12,9 @@ const TambahKost = () => {
                 <NavbarPemilik/>
                 <div className="w-full h-screen overflow-x-hidden border-t flex flex-col">
                     <main className="w-full flex-grow p-6">
-                        <i onClick={handleBackClick} className="fa-solid fa-arrow-left fa-2x mb-4"></i>
+                        <Link style={{ color: 'black' }} to={"/pemilik/dashboard"}>
+                            <i className="fa-solid fa-arrow-left fa-2x mb-4 "></i>
+                        </Link>
                         <h1 className="text-3xl text-black pb-6 font-bold text-center">Tambah Kost</h1>
                         <form className="space-y-6">
                             <div className="flex flex-col">

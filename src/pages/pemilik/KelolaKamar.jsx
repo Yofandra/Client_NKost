@@ -1,16 +1,12 @@
 import React, {useState} from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import gambarKamar from "../../assets/images/kamar.webp";
 
 const KelolaKamar = () => {
 
     let navigate = useNavigate();
-
-    const handleBackClick = () => {
-        navigate('/pemilik/daftar-kost-kamar');
-    }
 
     const handleDetailClick = () => {
         navigate('/pemilik/detail-kamar');
@@ -27,11 +23,15 @@ const KelolaKamar = () => {
                 <NavbarPemilik/>
                 <div className="w-full h-screen overflow-x-hidden border-t flex flex-col">
                     <main className="w-full flex-grow p-6">
-                        <i onClick={handleBackClick} className="fa-solid fa-arrow-left fa-2x mb-4"></i>
+                        <Link style={{ color: 'black' }} to={"/pemilik/daftar-kost-kamar"}>
+                            <i className="fa-solid fa-arrow-left fa-2x mb-4 "></i>
+                        </Link>
                         <h1 className="text-3xl text-black pb-6 font-bold">Kelola Kamar</h1>
+                        <Link to={"/pemilik/tambah-kamar"}>
                         <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i className="fas fa-plus mr-3"></i> Tambah Kamar
-                    </button>
+                            <i className="fas fa-plus mr-3"></i> Tambah Kamar
+                        </button>
+                        </Link>
                         <div className="w-full mt-12">
                             <div className="bg-white overflow-auto">
                                 <table className="text-center w-full border-collapse">

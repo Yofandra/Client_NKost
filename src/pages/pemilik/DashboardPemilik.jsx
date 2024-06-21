@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
 import gambarKost from "../../assets/images/kost.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const DashboardPenyewa = () => {
     let navigate = useNavigate();
@@ -13,10 +13,6 @@ const DashboardPenyewa = () => {
 
     const handleEditClick = () => {
         navigate('/pemilik/edit-kost');
-    }
-
-    const handleCreateClick = () => {
-        navigate('/pemilik/tambah-kost');
     }
     
     const handleLocationClick = () => {
@@ -30,10 +26,11 @@ const DashboardPenyewa = () => {
         <div className="w-full overflow-x-hidden border-t flex flex-col">
           <main className="w-full flex-grow p-6">
             <h1 className="text-3xl text-black pb-6">Dashboard</h1>
-
-            <button onClick={handleCreateClick} className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+            <Link to={"/pemilik/tambah-kost"}>
+            <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
               <i className="fas fa-plus mr-3"></i> Tambah Kost
             </button>
+            </Link>
 
             <div className="w-full mt-12">
               <p className="text-xl pb-3 flex items-center">
@@ -71,16 +68,16 @@ const DashboardPenyewa = () => {
                       { id: 4, name: "Kost D",  deskripsi: " deskripsi 4", gambar: "Edit", location: "Location D" }
                     ].map(item => (
                       <tr key={item.id} onClick={handleDetailClick} className="hover:bg-grey-lighter ">
-                        <td className="py-4 px-6 border-b border-grey-light">{item.id}</td>
-                        <td className="py-4 px-6 border-b border-grey-light">{item.name}</td>
-                        <td className="py-4 px-6 border-b border-grey-light">{item.deskripsi}</td>
-                        <td className="py-4 px-6 border-b border-grey-light"><img src={gambarKost} alt="" /></td>
-                        <td className="py-4 px-6 border-b border-grey-light"><button onClick={(e) => { e.stopPropagation(); handleLocationClick(item.id); }} className="bg-[#F39200] w-28 p-0">Detail Lokasi</button></td>
-                        <td className="py-4 px-6 border-b border-grey-light">
-                        <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
-                        <button className="bg-[#F39200] w-24 font-bold">Hapus</button>
-                        </td>
-                      </tr>
+                          <td className="py-4 px-6 border-b border-grey-light">{item.id}</td>
+                          <td className="py-4 px-6 border-b border-grey-light">{item.name}</td>
+                          <td className="py-4 px-6 border-b border-grey-light">{item.deskripsi}</td>
+                          <td className="py-4 px-6 border-b border-grey-light"><img src={gambarKost} alt="" /></td>
+                          <td className="py-4 px-6 border-b border-grey-light"><button onClick={(e) => { e.stopPropagation(); handleLocationClick(item.id); }} className="bg-[#F39200] w-28 p-0">Detail Lokasi</button></td>
+                          <td className="py-4 px-6 border-b border-grey-light">
+                          <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
+                          <button className="bg-[#F39200] w-24 font-bold">Hapus</button>
+                          </td>
+                        </tr>
                     ))}
                   </tbody>
                 </table>

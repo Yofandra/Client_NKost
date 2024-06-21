@@ -3,17 +3,10 @@ import SidebarPemilik from '../../components/SidebarPemilik';
 import NavbarPemilik from '../../components/NavbarPemilik';
 import gambarKamar from '../../assets/images/kamar.webp';
 import gambarKost from '../../assets/images/kost.png';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 const DaftarKostKamar = () => {
-    
-    let navigate = useNavigate();
-
-    const handleButtonClick = () => {
-        navigate('/pemilik/kelola-kamar');
-    }
-    
     return(
         <div className="bg-gray-100 font-family-karla flex text-black">
             <SidebarPemilik />
@@ -28,7 +21,9 @@ const DaftarKostKamar = () => {
                             <h1 className='text-lg font-bold'>Kost Rejeki</h1>
                             <p className='truncate'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quasi vitae fugit beatae, eum harum voluptatem sit id fugiat delectus? Quod recusandae quo molestias sint corporis porro voluptate voluptas aspernatur!</p>
                             <div className="flex justify-center">
-                                <button onClick={handleButtonClick} className="bg-sidebar font-bold text-center text-white">Kelola Kamar</button>
+                                <Link to={"/pemilik/kelola-kamar"}>
+                                    <button className="bg-sidebar font-bold text-center text-white">Kelola Kamar</button>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -26,6 +26,7 @@ import Laporan from './pages/pemilik/Laporan';
 import DaftarKostPenilaian from './pages/pemilik/DaftarKostPenilaian';
 import Penilaian from './pages/pemilik/Penilaian';
 import PermintaanKamar from './pages/pemilik/PermintaanKamar';
+import TambahKamar from './pages/pemilik/TambahKamar';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -49,6 +50,7 @@ ReactDOM.render(
         <Route path="/pemilik/detail-lokasi" element={<DetailLokasi />} />
         <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
         <Route path="/pemilik/daftar-kost-kamar" element={<DaftarKostKamar />} />
+        <Route path="/pemilik/tambah-kamar" element={<TambahKamar />} />
         <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
         <Route path="/pemilik/edit-kamar" element={<EditKamar />} />
         <Route path="/pemilik/laporan" element={<Laporan />} />
