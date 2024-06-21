@@ -6,8 +6,8 @@ import Navbar from "../../components/NavbarPenyewa";
 const DashboardPenyewa = () => {
   return (
     <>
-      <Navbar />
       <div className="w-full relative bg-whitesmoke-100 h-[2440px] overflow-hidden text-left text-11xl text-black font-inria-sans">
+      <Navbar />
         <div className="absolute top-[146px] left-[1760px] w-[427px] h-[249px]">
           <div className="absolute top-[0px] left-[0px] rounded-3xs bg-dimgray w-[427px] h-[249px]" />
         </div>

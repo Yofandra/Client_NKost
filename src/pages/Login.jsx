@@ -3,6 +3,7 @@ import illustration from "../assets/images/2.png";
 import api from "../axios/api";
 import Swal from "../utils/sweetAlert";
 import { useNavigate, Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,9 +25,20 @@ const Login = () => {
         timer: 1500,
       });
 
-      localStorage.setItem("token", response.data.token);
+      const {token} = response.data
+      localStorage.setItem("token", token);
+
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
       setTimeout(() => {
-        navigate("/pemilik/dashboard");
+        if (userRole === "penyewa"){
+          navigate("/penyewa/dashboard");
+        } else if (userRole === "pemilik"){
+          navigate("/pemilik/dashboard");
+        }else{
+          navigate("/admin/dashboard");
+        }
       }, 1500);
     } catch (error) {
       Swal.fire({
