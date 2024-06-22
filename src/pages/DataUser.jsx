@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function DataUser() {
   const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((response) => response.json())
-      .then((data) => setUserData(data))
+    axios
+      .get("http://localhost:5000/users")
+      .then((response) => setUserData(response.data))
       .catch((error) => console.error("Error fetching user data:", error));
   }, []);
 

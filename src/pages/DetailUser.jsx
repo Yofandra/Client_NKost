@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function DetailUser() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${id}`)
-      .then((response) => response.json())
-      .then((data) => setUser(data))
+    axios
+      .get(`http://localhost:5000/users/${id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
       .catch((error) => console.error("Error fetching user detail:", error));
   }, [id]);
 

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function DataKos() {
   const [kos, setKos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/kos")
-      .then((response) => response.json())
-      .then((data) => {
-        setKos(data);
+    axios
+      .get("http://localhost:5000/kos")
+      .then((response) => {
+        setKos(response.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -20,13 +21,10 @@ function DataKos() {
     const updatedKos = kos.filter((kosItem) => kosItem.id !== id);
     setKos(updatedKos);
 
-    fetch(`http://localhost:5000/kos/${id}`, {
-      method: "DELETE",
-    })
+    axios
+      .delete(`http://localhost:5000/kos/${id}`)
       .then((response) => {
-        if (response.ok) {
-          console.log("Deleted successfully");
-        }
+        console.log("Deleted successfully");
       })
       .catch((error) => {
         console.error("Error deleting data:", error);

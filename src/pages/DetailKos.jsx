@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function DetailKos() {
   const { id } = useParams();
@@ -8,15 +9,10 @@ function DetailKos() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/kos/${id}`)
+    axios
+      .get(`http://localhost:5000/kos/${id}`)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setKos(data);
+        setKos(response.data);
         setLoading(false);
       })
       .catch((error) => {
