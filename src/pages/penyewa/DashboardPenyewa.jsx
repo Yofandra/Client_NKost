@@ -1,99 +1,185 @@
 import Size24pxIcon from "../../components/Size24pxIcon";
-import GroupComponent1 from "../../components/GroupComponent1";
-import GroupComponent from "../../components/GroupComponent";
 import Navbar from "../../components/NavbarPenyewa";
+import yellowStar from "../../assets/images/yellow-star.png";
+import logoUser from "../../assets/images/logo-user.png";
+import blackStar from "../../assets/images/black-star.png";
+import { Link } from "react-router-dom";
+import Swal from "../../utils/sweetAlert";
+import { useEffect, useState } from "react";
+import { getKostByRoom } from "../../axios/kost-service";
+import { getLocationByIdKost } from "../../axios/location-service";
+import { getRatingByIdKost } from "../../axios/rating-service";
+import { getUserById } from "../../axios/user-service"; // Tambahkan ini
 
 const DashboardPenyewa = () => {
+  const [dataKost, setDataKost] = useState(null);
+  const [dataLocation, setDataLocation] = useState(null);
+  const [dataRating, setDataRating] = useState(null);
+  const [userDetails, setUserDetails] = useState({}); // Untuk menyimpan detail pengguna
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const kostResponse = await getKostByRoom();
+      setDataKost(kostResponse);
+
+      const locationResponse = await getLocationByIdKost(kostResponse.id);
+      setDataLocation(locationResponse);
+
+      const ratingResponse = await getRatingByIdKost(kostResponse.id);
+      setDataRating(ratingResponse);
+
+      const userResult = await Promise.all(
+        ratingResponse.map(async (rating) => {
+          const userResponse = await getUserById(rating.id_user);
+          return { id_user: rating.id_user, user: userResponse.data };
+        })
+      );
+
+      const userDetailsMap = userResult.reduce((acc, { id_user, user }) => {
+        acc[id_user] = user;
+        return acc;
+      }, {});
+
+      setUserDetails(userDetailsMap);
+
+      console.log("Data Location:", dataLocation);
+      console.log("Data Kost:", dataKost);
+      console.log("Data Rating:", dataRating);
+      console.log("User Details:", userDetails);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      Swal.fire({
+        title: "Gagal Mengambil Data",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
+    }
+  };
+
   return (
     <>
-      <div className="w-full relative bg-whitesmoke-100 h-[2440px] overflow-hidden text-left text-11xl text-black font-inria-sans">
       <Navbar />
-        <div className="absolute top-[146px] left-[1760px] w-[427px] h-[249px]">
-          <div className="absolute top-[0px] left-[0px] rounded-3xs bg-dimgray w-[427px] h-[249px]" />
-        </div>
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[128px] right-[88px] w-[167px] h-[67px]">
-          <div className="absolute top-[16px] right-[58px] text-xl font-medium font-inter text-darkolivegreen text-left flex items-center w-[109px] h-9">
-            kamar saya
-          </div>
-          <Size24pxIcon
-            size24pxIconSize24px="/chevronright.svg"
-            size24pxIconWidth="54px"
-            size24pxIconHeight="67px"
-            size24pxIconPosition="absolute"
-            size24pxIconTop="0px"
-            size24pxIconLeft="113px"
-          />
-        </button>
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[1163px] right-[103px] w-[111px] h-[67px]">
-          <div className="absolute top-[0px] right-[0px] w-[111px] h-[67px]">
-            <div className="absolute top-[22px] right-[69px] text-xl font-medium font-inter text-darkolivegreen text-left">
-              Nilai
+      {dataKost ? (
+        <>
+          <div className="w-full">
+            <div className="flex justify-end mr-28">
+              <Link
+                to={"/penyewa/kamar-saya"}
+                className="flex justify-center my-4 mx-12"
+              >
+                <p className="text-black mx-3 text-xl">Kamar Saya</p>
+                <i className="fa-solid fa-chevron-right fa-xl my-4 text-black"></i>
+              </Link>
             </div>
-            <Size24pxIcon
-              size24pxIconSize24px="/chevronright.svg"
-              size24pxIconWidth="54px"
-              size24pxIconHeight="67px"
-              size24pxIconPosition="absolute"
-              size24pxIconTop="0px"
-              size24pxIconLeft="57px"
-            />
-          </div>
-        </button>
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[2249px] right-[96px] w-[214px] h-[67px]">
-          <div className="absolute top-[0px] right-[0px] w-[214px] h-[67px]">
-            <div className="absolute top-[22px] right-[53px] text-xl font-medium font-inter text-darkolivegreen text-left">
-              Lihat Daftar Kost
+            <div className="flex justify-center">
+              <img
+                className="w-1/2"
+                src={dataKost.image}
+                alt={dataKost.url_image}
+              />
             </div>
-            <Size24pxIcon
-              size24pxIconSize24px="/chevronright.svg"
-              size24pxIconWidth="54px"
-              size24pxIconHeight="67px"
-              size24pxIconPosition="absolute"
-              size24pxIconTop="0px"
-              size24pxIconLeft="160px"
-            />
+            {dataKost && dataLocation && (
+              <div className="mx-28 text-black my-8">
+                <b className="text-xl">{dataKost.name_kost}</b>
+                <p>
+                  {dataLocation.length > 0 && (
+                    <>
+                      {dataLocation[0].detail} {dataLocation[0].village}{" "}
+                      {dataLocation[0].subdistrict} {dataLocation[0].regency}
+                    </>
+                  )}
+                </p>
+                {dataLocation.length > 0 && (
+                  <a
+                    href={dataLocation[0].point_gmap}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Link Google Map
+                  </a>
+                )}
+              </div>
+            )}
+            <div className="mx-28 text-black">
+              <b className="text-xl">Deskripsi Kost:</b>
+              <p>{dataKost.description_kost}</p>
+            </div>
+            <div className="flex justify-between mt-24">
+              <div className="flex justify-center mx-28">
+                <img className="w-8 h-8" src={yellowStar} alt="" />
+                <b className="text-black mx-4 text-xl">
+                  {dataRating ? dataRating.length : 0} reviews
+                </b>
+              </div>
+              <div className="flex mr-28">
+                <Link className="flex justify-center my-4 mx-12">
+                  <p className="text-black mx-3 text-xl">Nilai</p>
+                  <i className="fa-solid fa-chevron-right fa-xl my-4 text-black"></i>
+                </Link>
+              </div>
+            </div>
+            {dataRating && dataRating.length > 0 && (
+              <div className="mx-28">
+                {dataRating.map((rating, index) => (
+                  <div key={index} className="flex my-4">
+                    <img className="w-10 h-fit" src={logoUser} alt="" />
+                    <div className="mx-8 my-2 text-black">
+                      <b className="text-xl">
+                        {userDetails[rating.id_user]?.name || "User"}
+                      </b>
+                      <div className="flex mt-2">
+                        <img className="w-5 h-fit" src={blackStar} alt="" />
+                        <p className="mx-2">{rating.score}</p>
+                      </div>
+                      <p>{rating.comment}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="flex justify-end mr-28 mt-28">
+              <Link className="flex justify-center my-4 mx-12">
+                <p className="text-black mx-3 text-xl">Lihat Daftar Kost</p>
+                <i className="fa-solid fa-chevron-right fa-xl my-4 text-black"></i>
+              </Link>
+            </div>
           </div>
-        </button>
-        <img
-          className="absolute top-[219px] left-[335px] w-[771px] h-[508px] object-cover"
-          alt=""
-          src="/group-2553@2x.png"
-        />
-        <div className="absolute top-[1028px] left-[93px] w-6 h-6">
-          <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-        </div>
-        <div className="absolute top-[755px] left-[85px] w-[650px] h-[108px] text-16xl">
-          <b className="absolute top-[0px] left-[0px]">Kost Herman</b>
-          <div className="absolute top-[36px] left-[0px] text-11xl font-light inline-block w-[650px]">
-            Jl.Manunggal No.169, Gn. Bahagia, Kecamatan Balikpapan Selatan, Kota
-            balikpapan
-          </div>
-        </div>
-        <div className="absolute top-[1180px] left-[88px] w-[216px] h-9">
-          <b className="absolute top-[0px] left-[35px]">5.0 (3 Review)</b>
+        </>
+      ) : (
+        <>
           <img
-            className="absolute top-[4px] left-[0px] w-[27px] h-[25px] object-cover"
+            className="absolute h-[2.54%] w-[3.47%] top-[4.95%] right-[6.6%] bottom-[92.51%] left-[89.93%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/image-32@2x.png"
+            src="/group-2552.svg"
           />
-        </div>
-        <GroupComponent1 />
-        <GroupComponent1 propTop="1596px" />
-        <GroupComponent1 propTop="1916px" />
-        <div className="absolute top-[891px] left-[85px] w-[1260px] h-[229px]">
-          <GroupComponent />
-          <div className="absolute top-[85px] left-[4px]">
-            <p className="m-0">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vulputate condimentum `}</p>
-            <p className="m-0">
-              erat, et lobortis magna suscipit sit amet. Suspendisse malesuada
-              et ligula nec porttitor. 
-            </p>
+          <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[40px] right-[107px] w-[214px] h-[67px]">
+            <div className="absolute top-[0px] right-[0px] w-[214px] h-[67px]">
+              <div className="absolute top-[22px] right-[53px] text-[20px] font-medium font-inter text-darkolivegreen text-left">
+                Lihat Daftar Kost
+              </div>
+              <Size24pxIcon
+                size24pxIconSize24px="/chevronright.svg"
+                size24pxIconWidth="54px"
+                size24pxIconHeight="67px"
+                size24pxIconPosition="absolute"
+                size24pxIconTop="0px"
+                size24pxIconLeft="160px"
+              />
+            </div>
+          </button>
+          <div className="absolute top-[1064px] left-[93px] w-6 h-6">
+            <div className="absolute top-[0px] left-[0px] w-6 h-6" />
           </div>
-        </div>
-        <div className="absolute top-[0px] left-[-5px] w-[1440px] h-[122px]">
-          <div className="absolute top-[0px] left-[0px] bg-gainsboro w-[1440px] h-[122px]" />
-        </div>
-      </div>
+          <b className="absolute top-[46px] left-[118px]">
+            Anda Belum Menyewa Kost
+          </b>
+        </>
+      )}
     </>
   );
 };

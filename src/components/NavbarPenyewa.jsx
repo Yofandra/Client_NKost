@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.png";
 import { useNavigate, Link } from "react-router-dom";
-import Swal from "../utils/sweetAlert"; // Assuming Swal is imported from your utils
+import Swal from "../utils/sweetAlert";
+import {jwtDecode} from "jwt-decode"; 
 
 const NavbarPenyewa = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [userName, setUserName] = useState(null); 
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.name) {
+          setUserName(decodedToken.name); 
+        }
+      } catch (error) {
+        console.error("Failed to decode token", error);
+      }
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     Swal.fire({
@@ -36,7 +52,7 @@ const NavbarPenyewa = () => {
       <div className="relative w-1/2 flex justify-end">
         <button
           onClick={toggleDropdown}
-          className="flex justify-center relative z-30 w-12 h-12 bg-white rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
+          className="flex justify-center relative z-30 w-12 h-12 bg-black rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
         >
           <i className="fa-solid fa-user fa-2x"></i>
         </button>
@@ -48,6 +64,7 @@ const NavbarPenyewa = () => {
         )}
         {isDropdownOpen && (
           <div className="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16 z-20">
+            <p className="flex justify-center py-8 bg-slate-300 rounded-lg">{userName}</p>
             <Link
               to={"/pemilik/dashboard"}
               className="block px-4 py-2 account-link text-black hover:text-white"
