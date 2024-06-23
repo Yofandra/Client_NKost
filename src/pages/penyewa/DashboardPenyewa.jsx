@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 import { getKostByRoom } from "../../axios/kost-service";
 import { getLocationByIdKost } from "../../axios/location-service";
 import { getRatingByIdKost } from "../../axios/rating-service";
-import { getUserById } from "../../axios/user-service"; // Tambahkan ini
+import { getUserById } from "../../axios/user-service"; 
 
 const DashboardPenyewa = () => {
   const [dataKost, setDataKost] = useState(null);
   const [dataLocation, setDataLocation] = useState(null);
   const [dataRating, setDataRating] = useState(null);
-  const [userDetails, setUserDetails] = useState({}); // Untuk menyimpan detail pengguna
+  const [userDetails, setUserDetails] = useState({}); 
 
   useEffect(() => {
     fetchData();
@@ -45,11 +45,6 @@ const DashboardPenyewa = () => {
       }, {});
 
       setUserDetails(userDetailsMap);
-
-      console.log("Data Location:", dataLocation);
-      console.log("Data Kost:", dataKost);
-      console.log("Data Rating:", dataRating);
-      console.log("User Details:", userDetails);
     } catch (error) {
       console.error("Error fetching data:", error);
       Swal.fire({
