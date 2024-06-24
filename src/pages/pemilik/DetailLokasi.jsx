@@ -1,32 +1,92 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import api from "../../axios/api";
 
 const DetailLokasi = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [isEditMode, setIsEditMode] = useState(false);
     const [lokasi, setLokasi] = useState({
-        id: "1",
-        detail: "Jln SoekarnoHatta No.4",
-        desa: "Pagerwojo",
-        kecamatan: "Kesamben",
-        kabupaten: "Blitar",
-        link: "link"
+        id_kost: id,
+        detail: "",
+        desa: "",
+        kecamatan: "",
+        kabupaten: "",
+        link: ""
     });
 
+    useEffect(() => {
+        const fetchLokasi = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await api.get(`/location/kost/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                console.log('API response:', response.data);
+                if (response.data.length > 0) {
+                    setIsEditMode(true);
+                    setLokasi({
+                        id_kost: response.data[0].id_kost,
+                        detail: response.data[0].detail,
+                        desa: response.data[0].village,
+                        kecamatan: response.data[0].subdistrict,
+                        kabupaten: response.data[0].regency,
+                        link: response.data[0].point_gmap
+                    });
+                } else {
+                    console.error("Data lokasi tidak ditemukan");
+                }
+            } catch (error) {
+                console.error("Error fetching lokasi data:", error);
+            }
+        };
+
+        fetchLokasi();
+    }, [id]);
+
     const handleChange = (e) => {
-        const { id, value } = e.target;
+        const { name, value } = e.target;
         setLokasi(prevLokasi => ({
             ...prevLokasi,
-            [id]: value
+            [name]: value
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (lokasi.id && lokasi.detail && lokasi.desa && lokasi.kecamatan && lokasi.kabupaten && lokasi.link) {
-            updateLokasi(lokasi);
-        } else {
-            createLokasi(lokasi);
+
+        const formData = new FormData();
+        formData.append("id_kost", lokasi.id_kost);
+        formData.append("detail", lokasi.detail);
+        formData.append("village", lokasi.desa);
+        formData.append("subdistrict", lokasi.kecamatan);
+        formData.append("regency", lokasi.kabupaten);
+        formData.append("point_gmap", lokasi.link);
+        try {
+            if (isEditMode) {
+                const token = localStorage.getItem('token');
+                await api.put(`/location/${id}`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+            } else {
+                const token = localStorage.getItem('token');
+                await api.post(`/location/`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+            }
+            navigate("/pemilik/dashboard");
+        } catch (error) {
+            console.error(`Error ${isEditMode ? "updating" : "creating"} lokasi:`, error);
         }
     };
 
@@ -43,8 +103,8 @@ const DetailLokasi = () => {
                         <h1 className="text-3xl text-black pb-6 font-bold text-center">Detail Lokasi</h1>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="flex flex-col">
-                                <label htmlFor="id" className="font-bold mb-2">Id Kost:</label>
-                                <div type="text" id="id" name="id" className="border-2 rounded-lg p-2 bg-white">{lokasi.id}</div>
+                                <label htmlFor="id_kost" className="font-bold mb-2">Id Kost:</label>
+                                <div type="text" id="id_kost" name="id_kost" className="border-2 rounded-lg p-2 bg-white">{lokasi.id_kost}</div>
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="detail" className="font-bold mb-2">Detail Alamat:</label>
