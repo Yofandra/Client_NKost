@@ -1,200 +1,139 @@
-import Size24pxIcon from "../../components/Size24pxIcon";
-import ListKost from "../../components/ListKost";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "../../utils/sweetAlert";
+import { getKost } from "../../axios/kost-service";
+import { getLocationByIdKost } from "../../axios/location-service";
+import { getRatingByIdKost } from "../../axios/rating-service";
 import Navbar from "../../components/NavbarPenyewa";
 
 const PageDaftarKost = () => {
+  const [dataKost, setDataKost] = useState([]);
+  const [dataLocation, setDataLocation] = useState({});
+  const [dataRating, setDataRating] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const kostResponse = await getKost();
+      setDataKost(kostResponse);
+
+      const locationPromises = kostResponse.map((kost) =>
+        getLocationByIdKost(kost.id)
+      );
+      const ratingPromises = kostResponse.map((kost) =>
+        getRatingByIdKost(kost.id)
+      );
+
+      const locationResponses = await Promise.all(locationPromises);
+      const ratingResponses = await Promise.all(ratingPromises);
+
+      const locationMap = {};
+      locationResponses.forEach((location, index) => {
+        locationMap[kostResponse[index].id] = location;
+      });
+      setDataLocation(locationMap);
+
+      const ratingMap = {};
+      ratingResponses.forEach((rating, index) => {
+        ratingMap[kostResponse[index].id] = rating;
+      });
+      setDataRating(ratingMap);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      Swal.fire({
+        title: "Gagal Mengambil Data",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
+    }
+  };
+
+  const calculateAverageRating = (ratings) => {
+    if (!Array.isArray(ratings) || ratings.length === 0) return 0;
+    const totalScore = ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    return (totalScore / ratings.length).toFixed(1);
+  };
+
+  const handleSewaKamar = (id) => {
+    navigate(`/penyewa/sewa-kamar/${id}`);
+  }
+
   return (
     <>
       <Navbar />
-    <div className="w-full relative bg-whitesmoke h-[2562px] overflow-hidden">
-      <div className="absolute top-[146px] left-[1760px] w-[427px] h-[249px]">
-        <div className="absolute top-[0px] left-[0px] rounded-3xs bg-dimgray w-[427px] h-[249px]" />
-      </div>
-      <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[0px] right-[1127px] w-[220px] h-[67px]">
-        <div className="absolute top-[15px] right-[0px] text-xl font-medium font-font text-darkolivegreen text-left flex items-center w-[166px] h-9">
-          Daftar Kos
+      <div className="w-full relative bg-whitesmoke h-auto overflow-hidden p-8">
+        <div className="flex justify-start mb-4 mx-40">
+          <Link to={"/penyewa/dashboard"}>
+            <i className="fa-solid fa-chevron-left fa-xl my-4 text-black"></i>
+          </Link>
+          <p className="text-black mx-6 text-xl">Daftar Kost</p>
         </div>
-        <Size24pxIcon
-          size24pxIconSize24px="/chevronright@2x.png"
-          size24pxIconWidth="54px"
-          size24pxIconHeight="67px"
-          size24pxIconPosition="absolute"
-          size24pxIconTop="0px"
-          size24pxIconLeft="0px"
-        />
-      </button>
-      <div className="absolute top-[833px] left-[159px] w-6 h-6">
-        <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-      </div>
-      <div className="absolute top-[1779px] left-[174px] w-6 h-6">
-        <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-      </div>
-      <div className="absolute top-[2746px] left-[170px] w-6 h-6">
-        <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-      </div>
-      <div className="absolute top-[146px] left-[170px] flex flex-col items-start justify-start gap-[85px]">
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[53px]">
-          <img
-            className="w-[378px] relative h-[187px] object-cover"
-            alt=""
-            src="/group-2553@2x.png"
-          />
-          <div className="w-[650px] relative h-[167px]">
-            <div className="absolute top-[0px] left-[0px] w-[650px] h-[54px]">
-              <b className="absolute top-[0px] left-[0px] text-16xl font-font text-black text-left">
-                Kost Herman
-              </b>
-              <div className="absolute top-[36px] left-[0px] text-mini font-light font-inria-sans text-black text-left inline-block w-[650px]">
-                Jl.Manunggal No.169, Gn. Bahagia, Kecamatan Balikpapan Selatan,
-                Kota balikpapan
-              </div>
-            </div>
-            <div className="absolute top-[114px] left-[1px] flex flex-row items-start justify-start gap-[20px]">
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1">
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  Kos Putra
+        {dataKost.map((kost, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-start justify-start my-14 mx-40 bg-gray-200 rounded-xl p-4 h-[300px]"
+          >
+            <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[20px]">
+              <img
+                className="w-[400px] h-[260px] object-cover rounded-xl"
+                alt=""
+                src={kost.image}
+              />
+              <div className="w-full">
+                <div className="flex flex-col items-start">
+                  <b className="text-16xl font-font text-black">
+                    {kost.name_kost}
+                  </b>
+                  <div className="text-mini font-light font-inria-sans text-black mt-2">
+                    {dataLocation[kost.id] && dataLocation[kost.id][0] && (
+                      <>
+                        {dataLocation[kost.id][0].detail}{" "}
+                        {dataLocation[kost.id][0].village}{" "}
+                        {dataLocation[kost.id][0].subdistrict}{" "}
+                        {dataLocation[kost.id][0].regency}
+                      </>
+                    )}
+                  </div>
+                  {dataLocation[kost.id] && dataLocation[kost.id][0] && (
+                    <a href={dataLocation[kost.id][0].point_gmap}>
+                      Link Google Map
+                    </a>
+                  )}
+                  <div className="text-black text-lg font-inria-sans text-red mt-2">
+                    Kamar Tersisa 3
+                  </div>
+                <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3">
+                  <div className="font-medium text-black">
+                    {kost.description_kost}
+                  </div>
+                </div>
+                <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3 gap-2">
+                  <img
+                    className="w-[27px] h-[25px] object-cover"
+                    alt=""
+                    src="/image-32@2x.png"
+                  />
+                  <div className="text-xl font-medium font-font text-black">
+                    {calculateAverageRating(dataRating[kost.id])}
+                  </div>
+                </div>
+                <div className="w-full rounded-3xs flex items-center justify-between py-3">
+                  <div className="text-black">
+                    Last active: 14/02/2024
+                  </div>
+                  <p onClick={() => handleSewaKamar(kost.id)} className="text-blue-500">Lihat daftar kamar</p>
+                </div>
                 </div>
               </div>
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1 gap-[10px]">
-                <img
-                  className="w-[27px] relative h-[25px] object-cover"
-                  alt=""
-                  src="/image-32@2x.png"
-                />
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  4.6
-                </div>
-              </div>
-              <div className="w-[281px] rounded-3xs bg-gainsboro overflow-hidden shrink-0 flex flex-row items-center justify-center py-[13px] px-1 box-border">
-                <div className="w-[27px] relative h-[27px]" />
-                <div className="relative text-xl font-medium font-font text-black text-left ml-[-46px]">
-                  Last active:14/02/2024
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[66px] left-[0px] text-lg font-inria-sans text-red text-left">
-              Kamar Tersisa 3
-            </div>
+            </button>
           </div>
-        </button>
-        <ListKost investasiRumahKosDenganCa="/investasi-rumah-kos-dengan-cara-pintar-gan---kaskus-1@2x.png" />
-        <ListKost
-          investasiRumahKosDenganCa="/download-1@2x.png"
-          propWidth="295px"
-        />
+        ))}
       </div>
-      <div className="absolute top-[963px] left-[170px] flex flex-col items-start justify-start gap-[85px]">
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[53px]">
-          <img
-            className="w-[378px] relative h-[187px] object-cover"
-            alt=""
-            src="/group-2553@2x.png"
-          />
-          <div className="w-[650px] relative h-[167px]">
-            <div className="absolute top-[0px] left-[0px] w-[650px] h-[54px]">
-              <b className="absolute top-[0px] left-[0px] text-16xl font-font text-black text-left">
-                Kost Herman
-              </b>
-              <div className="absolute top-[36px] left-[0px] text-mini font-light font-inria-sans text-black text-left inline-block w-[650px]">
-                Jl.Manunggal No.169, Gn. Bahagia, Kecamatan Balikpapan Selatan,
-                Kota balikpapan
-              </div>
-            </div>
-            <div className="absolute top-[114px] left-[1px] flex flex-row items-start justify-start gap-[20px]">
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1">
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  Kos Putra
-                </div>
-              </div>
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1 gap-[10px]">
-                <img
-                  className="w-[27px] relative h-[25px] object-cover"
-                  alt=""
-                  src="/image-32@2x.png"
-                />
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  4.6
-                </div>
-              </div>
-              <div className="w-[289px] rounded-3xs bg-gainsboro overflow-hidden shrink-0 flex flex-row items-center justify-center py-[13px] px-1 box-border">
-                <div className="w-[27px] relative h-[27px]" />
-                <div className="relative text-xl font-medium font-font text-black text-left ml-[-46px]">
-                  Last active:14/02/2024
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[66px] left-[0px] text-lg font-inria-sans text-red text-left">
-              Kamar Tersisa 3
-            </div>
-          </div>
-        </button>
-        <ListKost
-          investasiRumahKosDenganCa="/investasi-rumah-kos-dengan-cara-pintar-gan---kaskus-1@2x.png"
-          propWidth="303px"
-        />
-        <ListKost
-          investasiRumahKosDenganCa="/download-1@2x.png"
-          propWidth="299px"
-        />
-      </div>
-      <div className="absolute top-[1780px] left-[170px] flex flex-col items-start justify-start gap-[85px]">
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[53px]">
-          <img
-            className="w-[378px] relative h-[187px] object-cover"
-            alt=""
-            src="/group-2553@2x.png"
-          />
-          <div className="w-[650px] relative h-[167px]">
-            <div className="absolute top-[0px] left-[0px] w-[650px] h-[54px]">
-              <b className="absolute top-[0px] left-[0px] text-16xl font-font text-black text-left">
-                Kost Herman
-              </b>
-              <div className="absolute top-[36px] left-[0px] text-mini font-light font-inria-sans text-black text-left inline-block w-[650px]">
-                Jl.Manunggal No.169, Gn. Bahagia, Kecamatan Balikpapan Selatan,
-                Kota balikpapan
-              </div>
-            </div>
-            <div className="absolute top-[114px] left-[1px] flex flex-row items-start justify-start gap-[20px]">
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1">
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  Kos Putra
-                </div>
-              </div>
-              <div className="rounded-3xs bg-gainsboro overflow-hidden flex flex-row items-center justify-center py-[13px] px-1 gap-[10px]">
-                <img
-                  className="w-[27px] relative h-[25px] object-cover"
-                  alt=""
-                  src="/image-32@2x.png"
-                />
-                <div className="relative text-xl font-medium font-font text-black text-left">
-                  4.6
-                </div>
-              </div>
-              <div className="w-[302px] rounded-3xs bg-gainsboro overflow-hidden shrink-0 flex flex-row items-center justify-center py-[13px] px-1 box-border">
-                <div className="w-[27px] relative h-[27px]" />
-                <div className="relative text-xl font-medium font-font text-black text-left ml-[-46px]">
-                  Last active:14/02/2024
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[66px] left-[0px] text-lg font-inria-sans text-red text-left">
-              Kamar Tersisa 3
-            </div>
-          </div>
-        </button>
-        <ListKost
-          investasiRumahKosDenganCa="/investasi-rumah-kos-dengan-cara-pintar-gan---kaskus-1@2x.png"
-          propWidth="304px"
-        />
-        <ListKost
-          investasiRumahKosDenganCa="/download-1@2x.png"
-          propWidth="304px"
-        />
-      </div>
-      <div className="absolute top-[2226px] left-[1257px] w-6 h-6">
-        <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-      </div>
-    </div>
     </>
   );
 };

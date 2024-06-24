@@ -1,68 +1,109 @@
-import Size24pxIcon from "../../components/Size24pxIcon";
 import Navbar from "../../components/NavbarPenyewa";
-
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getRoomByIdKost, getRoomByIdUser } from "../../axios/room-service";
+import { createRoomRequest } from "../../axios/room-request-service";
+import Swal from "../../utils/sweetAlert";
 
 const PageSewaKamar = () => {
+  const { id } = useParams();
+  const [dataRoom, setDataRoom] = useState([]);
+  const [dataRoomUser, setDataRoomUser] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const roomResponse = await getRoomByIdKost(id);
+      setDataRoom(roomResponse);
+
+      const roomUserResponse = await getRoomByIdUser();
+      if (!roomUserResponse.id){
+        setDataRoomUser(null);
+        return
+      }
+      setDataRoomUser(roomUserResponse);
+      
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      Swal.fire({
+        title: "Gagal Mengambil Data",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
+    }
+  };
+
+  const handleCreateRoomRequest = async (roomId) => {
+    try {
+      await createRoomRequest({ id_room : roomId});
+      Swal.fire({
+        title: "Success",
+        text: "Room request created successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      fetchData();
+    } catch (error) {
+      Swal.fire({
+        title: "Gagal Mengajukan Sewa Kamar",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
+    }
+  }
+
   return (
     <>
       <Navbar />
-    <div className="w-full relative bg-whitesmoke h-[1019px] overflow-hidden text-left text-11xl text-black font-inter">
-      <div className="absolute top-[146px] left-[1760px] w-[427px] h-[249px]">
-        <div className="absolute top-[0px] left-[0px] rounded-3xs bg-dimgray w-[427px] h-[249px]" />
-      </div>
-      <div className="absolute top-[1064px] left-[93px] w-6 h-6">
-        <div className="absolute top-[0px] left-[0px] w-6 h-6" />
-      </div>
-      <button className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[0px] right-[1102px] w-[265px] h-[67px]">
-        <div className="absolute top-[15px] right-[0px] text-xl font-medium font-inter text-darkolivegreen text-left flex items-center w-[205px] h-9">
-          Tipe Kamar
+      <div className="w-full px-40 relative bg-whitesmoke h-auto overflow-hidden text-left text-11xl text-black font-inter p-8">
+        <div className="flex justify-start mb-4">
+          <Link to={"/penyewa/daftar-kost"}>
+            <i className="fa-solid fa-chevron-left fa-xl my-4 text-black"></i>
+          </Link>
+          <p className="text-black mx-6 text-xl">Daftar Kamar</p>
         </div>
-        <Size24pxIcon
-          size24pxIconSize24px="/chevronright@2x.png"
-          size24pxIconWidth="52px"
-          size24pxIconHeight="67px"
-          size24pxIconPosition="absolute"
-          size24pxIconTop="0px"
-          size24pxIconLeft="0px"
-        />
-      </button>
-      <div className="absolute top-[67px] left-[136px] w-[650px] h-24 text-[35px]">
-        <div className="absolute top-[0px] left-[0px] w-[650px] h-24">
-          <b className="absolute top-[0px] left-[0px]">Kost Herman</b>
-          <div className="absolute top-[50px] left-[0px] text-[20px] font-light inline-block w-[650px]">
-            Jl.Manunggal No.169, Gn. Bahagia, Kecamatan Balikpapan Selatan, Kota
-            balikpapan
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-[304px] left-[136px] flex flex-col items-center justify-start">
-        <img
-          className="w-[370px] relative rounded-3xs h-[200px] object-cover"
-          alt=""
-          src="/image-20@2x.png"
-        />
-      </div>
-      <b className="absolute top-[253px] left-[136px]">Kamar Single</b>
-      <b className="absolute top-[519px] left-[136px]">Rp. 1.700.000/ Bulan</b>
-      <button className="cursor-pointer [border:none] py-[18px] px-[46px] bg-[#F39200] bg-fixx  absolute top-[700px] left-[1093px] rounded-3xs w-[230px] overflow-hidden flex flex-row items-center justify-center box-border">
-        <b className="relative text-xl font-inter text-black text-left bg-transparent">
-          Ajukan Sewa
-        </b>
-      </button>
-      <div className="absolute top-[577px] left-[139px] w-[1257px] h-[72px]">
-        <div className="absolute top-[0px] left-[0px] w-[1257px] h-[72px]">
-          <div className="absolute top-[0px] left-[0px] w-[1257px] h-[72px]">
-            <div className="absolute top-[0px] left-[0px]">
-              <p className="m-0">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vulputate condimentum `}</p>
-              <p className="m-0">
-                erat, et lobortis magna suscipit sit amet. Suspendisse malesuada
-                et ligula nec porttitor. 
+        {dataRoom.length > 0 ? (
+          dataRoom.map((room, index) => (
+            <div key={index} className="flex flex-col items-start my-4 p-4 bg-gray-200 rounded-xl w-full">
+              <img
+                className="w-full max-w-[400px] rounded-xl h-[250px] object-cover"
+                alt={`Room ${room.num_room}`}
+                src={room.image}
+              />
+              <div className="mt-4">
+                <b className="text-xl">No Kamar: {room.num_room}</b>
+              </div>
+              <div className="my-4">
+                <b className="text-xl">Status: {room.status}</b>
+              </div>
+              <div className="mb-4">
+                <b className="text-xl">Rp. {room.price.toLocaleString()}/Bulan</b>
+              </div>
+              <p className="mb-4 text-xl">
+                {room.description_room}
               </p>
+              {room.status === "available" && !dataRoomUser === null ? (
+              <button onClick={() => (handleCreateRoomRequest(room.id))} className="cursor-pointer [border:none] py-4 px-10 bg-[#F39200] rounded-xl text-xl text-black font-inter">
+                Ajukan Sewa
+              </button>
+              ):(
+                <button className="cursor-not-allowed [border:none] py-4 px-10 bg-gray-400 rounded-xl text-xl text-black font-inter">
+                Kamar Tidak Tersedia
+                </button>
+              )}
             </div>
+          ))
+        ) : (
+          <div className="text-center w-full">
+            <p className="text-xl">Tidak ada data kamar tersedia</p>
           </div>
-        </div>
+        )}
       </div>
-    </div>
     </>
   );
 };

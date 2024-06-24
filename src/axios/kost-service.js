@@ -10,3 +10,15 @@ export const getKostByRoom = async () => {
         throw error;
     }
 }
+
+export const getKost = async () => {
+    try {
+        const token = localStorage.getItem("token");
+        const headers = token? {Authorization: `Bearer ${token}`} : {};
+        const response = await api.get("/kost", {headers});
+        return response.data;
+    }
+    catch (error) {
+        throw error;
+    }
+}

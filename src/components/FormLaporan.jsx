@@ -40,6 +40,7 @@ const FormLaporan = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
+      fetchData();
     } catch (error) {
       Swal.fire({
         title: "Gagal Mengupdate Data",
