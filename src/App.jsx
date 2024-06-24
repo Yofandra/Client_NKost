@@ -44,7 +44,7 @@ function App() {
         <Route path="/pemilik/detail-kost/:id" element={<DetailKost />} />
         <Route path="/pemilik/edit-kost/:id" element={<EditKost />} />
         <Route path="/pemilik/tambah-kost" element={<TambahKost />} />
-        <Route path="/pemilik/detail-lokasi" element={<DetailLokasi />} />
+        <Route path="/pemilik/detail-lokasi/:id" element={<DetailLokasi />} />
         <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
         <Route path="/pemilik/daftar-kost-kamar" element={<DaftarKostKamar />} />
         <Route path="/pemilik/tambah-kamar" element={<TambahKamar />} />

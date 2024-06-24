@@ -3,7 +3,6 @@ import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../axios/api";
-// import gambarKost from "../../assets/images/kost.png";
 
 const DetailKost = () => {
     const [kost, setKost] = useState(null);
@@ -19,22 +18,21 @@ const DetailKost = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setKost(response.data); // Mengatur data Kost ke state setelah berhasil memuat
+                setKost(response.data); 
             } catch (error) {
                 console.error('Error fetching Kost detail:', error);
-                // Handle error fetching data
             }
         };
 
         fetchKostDetail();
-    }, [id]); // Menggunakan useEffect untuk memuat data saat komponen dimuat dan saat id berubah
+    }, [id]); 
 
     const handleBackClick = () => {
         navigate('/pemilik/dashboard');
     };
 
     if (!kost) {
-        return <p>Loading...</p>; // Menampilkan pesan loading selama data sedang dimuat
+        return <p>Loading...</p>; 
     }
 
     return (
@@ -56,8 +54,8 @@ const DetailKost = () => {
                                         <p><b>Id Kost:</b> {kost.id}</p>
                                         <p><b>Nama Kost:</b> {kost.name_kost}</p>
                                         <p><b>Deskripsi:</b> {kost.description_kost}</p>
-                                        <p><b>Lokasi:</b> {kost.location}</p>
-                                        <p><b>Link Google Map:</b> {kost.google_map_link}</p>
+                                        <p><b>Lokasi:</b> {kost.fullAddress}</p>
+                                        <p><b>Link Google Map:</b> {kost.location}</p>
                                     </div>
                                 </div>
                             </div>

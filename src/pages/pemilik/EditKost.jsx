@@ -4,7 +4,6 @@ import NavbarPemilik from "../../components/NavbarPemilik";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import api from "../../axios/api";
 
-const token = localStorage.getItem('token');
 const EditKost = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -18,6 +17,7 @@ const EditKost = () => {
     useEffect(() => {
         const fetchKost = async () => {
             try {
+                const token = localStorage.getItem('token');
                 const response = await api.get(`/kost/id/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -48,13 +48,6 @@ const EditKost = () => {
         setFile(e.target.files[0]);
     };
 
-    // const handleFileChange = (event) => {
-    //     setKost((prevKost) => ({
-    //         ...prevKost,
-    //         image: event.target.files[0],
-    //     }));
-    // };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -62,13 +55,9 @@ const EditKost = () => {
         formData.append("name_kost", kost.name_kost);
         formData.append("description_kost", kost.description_kost);
         formData.append("file", file);
-        // if (kost.image) {
-        //     formData.append("image", kost.image);
-        // }
-
-        // console.log(kost.image);
 
         try {
+            const token = localStorage.getItem('token');
             await api.put(`/kost/${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",

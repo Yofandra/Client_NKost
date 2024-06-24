@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
-// import gambarKost from "../../assets/images/kost.png";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../axios/api";
 
@@ -10,7 +9,6 @@ const DashboardPemilik = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch data Kost dari backend saat komponen dimuat
         fetchData();
     }, []);
 
@@ -23,7 +21,7 @@ const DashboardPemilik = () => {
               }
           });
           console.log("Response from backend:", response.data);
-            setKosts(response.data); // Menyimpan data Kost dari backend ke dalam state
+            setKosts(response.data); 
         } catch (error) {
             console.error("Error fetching data:", error);
         }
