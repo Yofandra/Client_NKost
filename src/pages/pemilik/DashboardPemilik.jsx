@@ -92,8 +92,8 @@ const DashboardPemilik = () => {
                                                     <button onClick={(e) => { e.stopPropagation(); handleLocationClick(item.id); }} className="bg-[#F39200] w-28 p-0">Detail Lokasi</button>
                                                 </td>
                                                 <td className="py-4 px-6 border-b border-grey-light">
-                                                    <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-20 mr-2 font-bold">Edit</button>
-                                                    <button className="bg-[#F39200] w-24 font-bold">Hapus</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-12 p-0 mr-2 font-bold">Edit</button>
+                                                    <button className="bg-[#F39200] w-16 p-0 font-bold">Hapus</button>
                                                 </td>
                                             </tr>
                                         ))}

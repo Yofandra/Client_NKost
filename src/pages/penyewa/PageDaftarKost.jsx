@@ -78,7 +78,7 @@ const PageDaftarKost = () => {
             key={index}
             className="flex flex-col items-start justify-start my-14 mx-40 bg-gray-200 rounded-xl p-4 h-[300px]"
           >
-            <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[20px]">
+            <button className="[border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-[20px]">
               <img
                 className="w-[400px] h-[260px] object-cover rounded-xl"
                 alt=""
@@ -104,9 +104,6 @@ const PageDaftarKost = () => {
                       Link Google Map
                     </a>
                   )}
-                  <div className="text-black text-lg font-inria-sans text-red mt-2">
-                    Kamar Tersisa 3
-                  </div>
                 <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3">
                   <div className="font-medium text-black">
                     {kost.description_kost}
@@ -122,11 +119,9 @@ const PageDaftarKost = () => {
                     {calculateAverageRating(dataRating[kost.id])}
                   </div>
                 </div>
-                <div className="w-full rounded-3xs flex items-center justify-between py-3">
-                  <div className="text-black">
-                    Last active: 14/02/2024
-                  </div>
-                  <p onClick={() => handleSewaKamar(kost.id)} className="text-blue-500">Lihat daftar kamar</p>
+                <div className="w-full rounded-3xs flex items-center py-3">
+                  <p onClick={() => handleSewaKamar(kost.id)} className="text-black mr-2">Lihat daftar kamar</p>
+                  <i className="fa-solid fa-chevron-right my-4 text-black"></i>
                 </div>
                 </div>
               </div>
