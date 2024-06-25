@@ -41,7 +41,12 @@ const DetailLokasi = () => {
                     console.error("Data lokasi tidak ditemukan");
                 }
             } catch (error) {
-                console.error("Error fetching lokasi data:", error);
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    navigate('/login');
+                } else {
+                    console.error('Error fetching data', error);
+                }
             }
         };
 

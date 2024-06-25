@@ -22,9 +22,8 @@ const TambahKost = () => {
         formData.append("description_kost", deskripsi);
         formData.append("file", file);
 
-        const token = localStorage.getItem('token');
-
         try {
+            const token = localStorage.getItem('token');
             const response = await api.post('/kost/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -34,7 +33,12 @@ const TambahKost = () => {
             console.log("Response:", response.data);
             navigate("/pemilik/dashboard");
         } catch (error) {
-            console.error("Error:", error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                navigate('/login');
+            } else {
+                console.error('Error fetching data', error);
+            }
         }
     };
 

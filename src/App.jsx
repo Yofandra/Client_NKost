@@ -51,11 +51,11 @@ function App() {
         <Route path="/pemilik/edit-kost/:id" element={<EditKost />} />
         <Route path="/pemilik/tambah-kost" element={<TambahKost />} />
         <Route path="/pemilik/detail-lokasi/:id" element={<DetailLokasi />} />
-        <Route path="/pemilik/kelola-kamar" element={<KelolaKamar />} />
+        <Route path="/pemilik/kelola-kamar/:id" element={<KelolaKamar />} />
         <Route path="/pemilik/daftar-kost-kamar" element={<DaftarKostKamar />} />
         <Route path="/pemilik/tambah-kamar" element={<TambahKamar />} />
-        <Route path="/pemilik/detail-kamar" element={<DetailKamar />} />
-        <Route path="/pemilik/edit-kamar" element={<EditKamar />} />
+        <Route path="/pemilik/detail-kamar/:id" element={<DetailKamar />} />
+        <Route path="/pemilik/edit-kamar/:id" element={<EditKamar />} />
         <Route path="/pemilik/laporan" element={<Laporan />} />
         <Route path="/pemilik/daftar-kost-penilaian" element={<DaftarKostPenilaian />} />
         <Route path="/pemilik/penilaian" element={<Penilaian />} />

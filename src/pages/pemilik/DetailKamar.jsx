@@ -8,7 +8,7 @@ const DetailKamar = () => {
     let navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate('/pemilik/kelola-kamar');
+        navigate('/pemilik/kelola-kamar/1');
     }
     return(
         <div className="bg-gray-100 font-family-karla flex text-black">
