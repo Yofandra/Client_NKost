@@ -71,7 +71,12 @@ const EditKost = () => {
             });
             navigate("/pemilik/dashboard");
         } catch (error) {
-            console.error("Error updating kost:", error);
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                navigate('/login');
+            } else {
+                console.error('Error fetching data:', error.response ? error.response.data : error.message);
+            }
         }
     };
 

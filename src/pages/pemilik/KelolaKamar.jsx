@@ -77,7 +77,7 @@ const KelolaKamar = () => {
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.num_room}</td>
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.nama_penyewa}</td>
                                                 <td className="py-4 px-6 border-b border-grey-light">Rp {room.price}</td>
-                                                <td className="py-4 px-6 border-b border-grey-light">{room.description_room}</td>
+                                                <td className="py-4 px-6 border-b border-grey-light">{room.description}</td>
                                                 <td className="py-4 px-6 border-b border-grey-light"><img src={room.image || gambarKamar} alt="" /></td>
                                                 <td className="py-4 px-6 border-b border-grey-light">
                                                     <button onClick={(e) => { e.stopPropagation(); handleEditClick(room.id); }} className="bg-[#F39200] w-12 h-8 mr-2 font-bold text-sm p-0">Edit</button>
