@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import api from "../axios/api";
+import Swal from "../utils/sweetAlert";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    username: "",
+    name: "",
     email: "",
-    phoneNumber: "",
     password: "",
-    confirmPassword: "",
+    role: ""
   });
   const [error, setError] = useState("");
 
@@ -21,26 +21,23 @@ const RegisterForm = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError("Password dan konfirmasi password tidak cocok");
-      return;
-    }
 
     try {
-      const response = await fetch("http://localhost:5173/register", {
-        method: "POST",
+      const response = await api.post("/user/register", formData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("Registrasi gagal");
       }
-
-      const data = await response.json();
-      console.log("Registrasi berhasil:", data);
+      Swal.fire({
+        title: "Registrasi Berhasil",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       setError(error.message);
     }
@@ -56,17 +53,9 @@ const RegisterForm = () => {
         <form onSubmit={handleRegister}>
           <input
             type="text"
-            name="fullName"
-            placeholder="Nama Lengkap"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg mb-4"
-          />
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
+            name="name"
+            placeholder="name"
+            value={formData.name}
             onChange={handleChange}
             className="w-full p-3 border rounded-lg mb-4"
           />
@@ -79,14 +68,6 @@ const RegisterForm = () => {
             className="w-full p-3 border rounded-lg mb-4"
           />
           <input
-            type="text"
-            name="phoneNumber"
-            placeholder="No Handphone"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg mb-4"
-          />
-          <input
             type="password"
             name="password"
             placeholder="Password"
@@ -95,10 +76,10 @@ const RegisterForm = () => {
             className="w-full p-3 border rounded-lg mb-4"
           />
           <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Ulangi password"
-            value={formData.confirmPassword}
+            type="role"
+            name="role"
+            placeholder="role"
+            value={formData.role}
             onChange={handleChange}
             className="w-full p-3 border rounded-lg mb-4"
           />

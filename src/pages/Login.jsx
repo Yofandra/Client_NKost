@@ -85,8 +85,8 @@ const Login = () => {
             className="w-full p-3 border rounded-lg mb-4"
             required
           />
-          <Link to="/forgot-password" className="text-orange-500 block mb-4">
-            Lupa Password?
+          <Link to="/verification" className="text-orange-500 block mb-4">
+            Verifikasi Akun
           </Link>
           <button
             type="submit"

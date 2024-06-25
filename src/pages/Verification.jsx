@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from "react";
 import profileImage from "../assets/images/logo.png";
+import api from "../axios/api";
+import Swal from "../utils/sweetAlert";
 
-const ForgotPassword = () => {
+const Verification = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://https://localhost:5173/forgot-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
+      const response = await api.post('user/verify-account', {email},{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      if (!response.ok) {
-        throw new Error("Pengiriman tautan reset gagal");
+      if (response.status !== 200) {
+        throw new Error("Registrasi gagal");
       }
-
-      const data = await response.json();
-      console.log("Tautan reset berhasil dikirim:", data);
+      Swal.fire({
+        title: "Verifikasi Akun Berhasil",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
-      setError(error.message);
+      Swal.fire({
+        title: "Verifikasi Akun Gagal",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 
@@ -39,9 +43,8 @@ const ForgotPassword = () => {
           className="w-24 h-24 mx-auto mb-4"
         />
         <h2 className="text-2xl text-center text-orange-400 font-bold mb-6">
-          Reset Password
+          Verifikasi Akun
         </h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
         <form onSubmit={handleForgotPassword}>
           <input
             type="email"
@@ -54,7 +57,7 @@ const ForgotPassword = () => {
             type="submit"
             className="w-full bg-orange-500 text-white py-3 rounded-lg mb-4"
           >
-            Kirim Tautan Reset
+            Kirim Email
           </button>
         </form>
         <p className="mt-4 text-center text-black">
@@ -68,4 +71,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Verification;
