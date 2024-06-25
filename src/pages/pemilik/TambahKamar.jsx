@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../axios/api"; 
 
 const TambahKamar = () => {
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         noKamar: "",
         harga: "",
@@ -44,7 +45,7 @@ const TambahKamar = () => {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            navigate("/pemilik/kelola-kamar/1");
+            navigate(`/pemilik/kelola-kamar/${id}`);
         } catch (error) {
             console.error("Error creating room:", error);
         }
@@ -57,7 +58,7 @@ const TambahKamar = () => {
                 <NavbarPemilik />
                 <div className="w-full h-screen overflow-x-hidden border-t flex flex-col">
                     <main className="w-full flex-grow p-6">
-                        <Link style={{ color: 'black' }} to={"/pemilik/kelola-kamar"}>
+                        <Link style={{ color: 'black' }} to={`/pemilik/kelola-kamar/${id}`}>
                             <i className="fa-solid fa-arrow-left fa-2x mb-4"></i>
                         </Link>
                         <h1 className="text-3xl text-black pb-6 font-bold text-center">Tambah Kamar</h1>
