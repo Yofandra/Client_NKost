@@ -1,4 +1,3 @@
-import Size24pxIcon from "../../components/Size24pxIcon";
 import Navbar from "../../components/NavbarPenyewa";
 import yellowStar from "../../assets/images/yellow-star.png";
 import logoUser from "../../assets/images/logo-user.png";
@@ -138,7 +137,7 @@ const DashboardPenyewa = () => {
                 </b>
               </div>
               <div className="flex mr-28">
-                <Link className="flex justify-center my-4 mx-12">
+                <Link to={`/penyewa/penilaian/${dataKost.id}`} className="flex justify-center my-4 mx-12">
                   <p className="text-black mx-3 text-xl">Nilai</p>
                   <i className="fa-solid fa-chevron-right fa-xl my-4 text-black"></i>
                 </Link>

@@ -26,6 +26,11 @@ import DaftarKostPenilaian from './pages/pemilik/DaftarKostPenilaian';
 import Penilaian from './pages/pemilik/Penilaian';
 import PermintaanKamar from './pages/pemilik/PermintaanKamar';
 import TambahKamar from './pages/pemilik/TambahKamar';
+import DataUser from './pages/admin/DataUser';
+import DataKost from './pages/admin/DataKost';
+import DetailKostAdmin from './pages/admin/DetailKost';
+import DetailUserAdmin from './pages/admin/DetailUser';
+import PagePenilaian from './pages/penyewa/PagePenilaian';
 
 function App() {
   return (
@@ -40,6 +45,7 @@ function App() {
         <Route path="/penyewa/laporan" element={<PageLaporan />} />
         <Route path="/penyewa/daftar-kost" element={<PageDaftarKost />} />
         <Route path="/penyewa/sewa-kamar/:id" element={<PageSewaKamar />} />
+        <Route path="/penyewa/penilaian/:id" element={<PagePenilaian />} />
         <Route path="/pemilik/dashboard" element={<DashboardPemilik />} />
         <Route path="/pemilik/detail-kost/:id" element={<DetailKost />} />
         <Route path="/pemilik/edit-kost/:id" element={<EditKost />} />
@@ -54,6 +60,10 @@ function App() {
         <Route path="/pemilik/daftar-kost-penilaian" element={<DaftarKostPenilaian />} />
         <Route path="/pemilik/penilaian" element={<Penilaian />} />
         <Route path="/pemilik/permintaan-kamar" element={<PermintaanKamar />} />
+        <Route path="/admin/data-user" element={<DataUser />} />
+        <Route path="/admin/data-kost" element={<DataKost />} />
+        <Route path="/admin/detail-kost/:id" element={<DetailKostAdmin />} />
+        <Route path="/admin/detail-user/:id" element={<DetailUserAdmin />} />
       </Routes>
   );
 }

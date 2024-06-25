@@ -40,7 +40,7 @@ const Login = () => {
         } else if (userRole === "pemilik"){
           navigate("/pemilik/dashboard");
         }else{
-          navigate("/admin/dashboard");
+          navigate("/admin/data-user");
         }
       }, 1500);
     } catch (error) {
