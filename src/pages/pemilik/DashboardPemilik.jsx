@@ -23,7 +23,12 @@ const DashboardPemilik = () => {
           console.log("Response from backend:", response.data);
             setKosts(response.data); 
         } catch (error) {
-            console.error("Error fetching data:", error);
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                navigate('/login');
+            } else {
+                console.error('Error fetching data', error);
+            }
         }
     };
 
