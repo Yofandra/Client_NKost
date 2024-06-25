@@ -20,8 +20,9 @@ const PageSewaKamar = () => {
       setDataRoom(roomResponse);
 
       const roomUserResponse = await getRoomByIdUser();
-      if (!roomUserResponse.id){
+      if (!roomUserResponse.data){
         setDataRoomUser(null);
+        console.log("Room data:", roomUserResponse);
         return
       }
       setDataRoomUser(roomUserResponse);
@@ -87,7 +88,7 @@ const PageSewaKamar = () => {
               <p className="mb-4 text-xl">
                 {room.description_room}
               </p>
-              {room.status === "available" && !dataRoomUser === null ? (
+              {room.status === "available" && dataRoomUser === null ? (
               <button onClick={() => (handleCreateRoomRequest(room.id))} className="cursor-pointer [border:none] py-4 px-10 bg-[#F39200] rounded-xl text-xl text-black font-inter">
                 Ajukan Sewa
               </button>
