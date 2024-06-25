@@ -52,9 +52,6 @@ function DetailUser() {
                       <strong>Email:</strong> {user.email}
                     </p>
                     <p>
-                      <strong>Password:</strong> {user.password}
-                    </p>
-                    <p>
                       <strong>Role:</strong> {user.role}
                     </p>
                     <p>

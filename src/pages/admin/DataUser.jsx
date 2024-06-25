@@ -45,7 +45,6 @@ function DataUser() {
                       <th className="py-2 px-4 border">Id</th>
                       <th className="py-2 px-4 border">Nama</th>
                       <th className="py-2 px-4 border">Email</th>
-                      <th className="py-2 px-4 border">Password</th>
                       <th className="py-2 px-4 border">Role</th>
                       <th className="py-2 px-4 border">Status</th>
                       <th className="py-2 px-4 border">Last Login</th>
@@ -58,7 +57,6 @@ function DataUser() {
                         <td className="py-2 px-4 border">{user.id}</td>
                         <td className="py-2 px-4 border">{user.name}</td>
                         <td className="py-2 px-4 border">{user.email}</td>
-                        <td className="py-2 px-4 border">{user.password}</td>
                         <td className="py-2 px-4 border">{user.role}</td>
                         <td className="py-2 px-4 border">{user.status}</td>
                         <td className="py-2 px-4 border">{user.last_login}</td>
