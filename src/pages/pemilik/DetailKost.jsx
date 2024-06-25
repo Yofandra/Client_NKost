@@ -20,7 +20,12 @@ const DetailKost = () => {
                 });
                 setKost(response.data); 
             } catch (error) {
-                console.error('Error fetching Kost detail:', error);
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    navigate('/login');
+                } else {
+                    console.error('Error fetching data', error);
+                }
             }
         };
 

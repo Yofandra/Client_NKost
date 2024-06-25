@@ -17,9 +17,14 @@ const Laporan = () => {
         });
         setLaporan(response.data);
       } catch (error) {
-        console.error("Error fetching laporan data:", error);
-      }
-    };
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('token');
+            navigate('/login');
+        } else {
+            console.error('Error fetching data', error);
+        }
+    }
+};
 
     fetchLaporan();
   }, []);

@@ -28,7 +28,7 @@ const Login = () => {
       const {token} = response.data
       localStorage.setItem("token", token);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/Login");
       }, 36000000);
 
       const decodedToken = jwtDecode(token);

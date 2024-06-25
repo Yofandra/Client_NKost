@@ -29,7 +29,12 @@ const EditKost = () => {
                     image: response.data.image,
                 });
             } catch (error) {
-                console.error("Error fetching kost data:", error);
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    navigate('/login');
+                } else {
+                    console.error('Error fetching data', error);
+                }
             }
         };
 
