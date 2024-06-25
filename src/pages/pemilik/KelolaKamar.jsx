@@ -18,7 +18,7 @@ const KelolaKamar = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setRooms(response.data);
+                setRooms(response.data || []);
             } catch (error) {
                 if (error.response && error.response.status === 401) {
                     localStorage.removeItem('token');
@@ -71,7 +71,7 @@ const KelolaKamar = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {rooms.map(room => (
+                                        {Array.isArray(rooms) && rooms.map(room => (
                                             <tr key={room.id} onClick={() => handleDetailClick(room.id)} className="hover:bg-grey-lighter ">
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.id}</td>
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.num_room}</td>

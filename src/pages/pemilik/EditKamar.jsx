@@ -25,9 +25,6 @@ const EditKamar = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log("Response from backend:", response.data);
-
-                
     
                 setRoom({
                     noKamar: response.data.num_room, 
@@ -65,11 +62,6 @@ const EditKamar = () => {
         formData.append('price', room.harga);
         formData.append('description_room', room.deskripsi);
         formData.append('file', file);
-
-        console.log('FormData content:');
-        for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-    }
 
         try {
             const token = localStorage.getItem('token');
