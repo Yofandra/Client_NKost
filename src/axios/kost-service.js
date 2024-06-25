@@ -22,3 +22,15 @@ export const getKost = async () => {
         throw error;
     }
 }
+
+export const getKostById = async (id) => {
+    try {
+        const token = localStorage.getItem("token");
+        const headers = token? {Authorization: `Bearer ${token}`} : {};
+        const response = await api.get(`/kost/id/${id}`, {headers});
+        return response.data;
+    }
+    catch (error) {
+        throw error;
+    }
+}

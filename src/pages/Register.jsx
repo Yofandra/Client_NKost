@@ -109,10 +109,10 @@ const RegisterForm = () => {
             Registrasi
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-black">
           Sudah punya akun?{" "}
           <a href="/login" className="text-orange-500">
-            Masuk
+            Login
           </a>
         </p>
       </div>

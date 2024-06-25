@@ -95,7 +95,7 @@ const Login = () => {
             Login
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-black">
           Belum punya akun?{" "}
           <Link to="/register" className="text-orange-500">
             Registrasi

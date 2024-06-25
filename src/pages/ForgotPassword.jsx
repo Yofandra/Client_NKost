@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import profileImage from "../assets/images/profile.jpg";
+import profileImage from "../assets/images/logo.png";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +36,7 @@ const ForgotPassword = () => {
         <img
           src={profileImage}
           alt="Profile"
-          className="w-24 h-24 rounded-full mx-auto mb-4"
+          className="w-24 h-24 mx-auto mb-4"
         />
         <h2 className="text-2xl text-center text-orange-400 font-bold mb-6">
           Reset Password
@@ -57,7 +57,7 @@ const ForgotPassword = () => {
             Kirim Tautan Reset
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-black">
           Kembali ke{" "}
           <a href="/login" className="text-orange-500">
             Login
