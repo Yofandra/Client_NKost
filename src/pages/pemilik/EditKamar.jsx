@@ -72,7 +72,7 @@ const EditKamar = () => {
                 }
             });
 
-            navigate(`/pemilik/kelola-kamar/${response.data.id_kost}`);
+            navigate(`/pemilik/edit-kamar/${id}`);
         } catch (error) {
             console.error('Error updating room:', error);
         }
