@@ -55,13 +55,15 @@ const PageDaftarKost = () => {
 
   const calculateAverageRating = (ratings) => {
     if (!Array.isArray(ratings) || ratings.length === 0) return 0;
-    const totalScore = ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    console.log("Ratings:", ratings);
+    const totalScore = ratings.reduce((sum, rating) => sum + rating.ratings, 0);
+    console.log("Total score:", totalScore);
     return (totalScore / ratings.length).toFixed(1);
   };
 
   const handleSewaKamar = (id) => {
     navigate(`/penyewa/sewa-kamar/${id}`);
-  }
+  };
 
   return (
     <>
@@ -104,25 +106,32 @@ const PageDaftarKost = () => {
                       Link Google Map
                     </a>
                   )}
-                <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3">
-                  <div className="font-medium text-black">
-                    {kost.description_kost}
+                  <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3">
+                    <div className="font-medium text-black">
+                      {kost.description_kost}
+                    </div>
                   </div>
-                </div>
-                <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3 gap-2">
-                  <img
-                    className="w-[27px] h-[25px] object-cover"
-                    alt=""
-                    src="/image-32@2x.png"
-                  />
-                  <div className="text-xl font-medium font-font text-black">
-                    {calculateAverageRating(dataRating[kost.id])}
+                  <div className="rounded-3xs bg-gainsboro flex items-center justify-center py-3 gap-2">
+                    <img
+                      className="w-[27px] h-[25px] object-cover"
+                      alt=""
+                      src="/image-32@2x.png"
+                    />
+                    <div className="text-xl font-medium font-font text-black">
+                      {dataRating[kost.id]
+                        ? calculateAverageRating(dataRating[kost.id])
+                        : "Belum ada rating"}
+                    </div>
                   </div>
-                </div>
-                <div className="w-full rounded-3xs flex items-center py-3">
-                  <p onClick={() => handleSewaKamar(kost.id)} className="text-black mr-2">Lihat daftar kamar</p>
-                  <i className="fa-solid fa-chevron-right my-4 text-black"></i>
-                </div>
+                  <div className="w-full rounded-3xs flex items-center py-3">
+                    <p
+                      onClick={() => handleSewaKamar(kost.id)}
+                      className="text-black mr-2"
+                    >
+                      Lihat daftar kamar
+                    </p>
+                    <i className="fa-solid fa-chevron-right my-4 text-black"></i>
+                  </div>
                 </div>
               </div>
             </button>
