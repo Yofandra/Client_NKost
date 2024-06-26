@@ -8,13 +8,11 @@ import { useEffect, useState } from "react";
 import { getKostByRoom } from "../../axios/kost-service";
 import { getLocationByIdKost } from "../../axios/location-service";
 import { getRatingByIdKost } from "../../axios/rating-service";
-import { getUserById } from "../../axios/user-service";
 
 const DashboardPenyewa = () => {
   const [dataKost, setDataKost] = useState(null);
   const [dataLocation, setDataLocation] = useState(null);
   const [dataRating, setDataRating] = useState([]);
-  const [userDetails, setUserDetails] = useState({});
   const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
@@ -34,25 +32,13 @@ const DashboardPenyewa = () => {
       setDataLocation(locationResponse);
 
       const ratingResponse = await getRatingByIdKost(kostResponse.id);
+      console.log("Rating response:", ratingResponse); // Logging data rating
+
       if (Array.isArray(ratingResponse)) {
         setDataRating(ratingResponse);
 
-        const userResult = await Promise.all(
-          ratingResponse.map(async (rating) => {
-            const userResponse = await getUserById(rating.id_user);
-            return { id_user: rating.id_user, user: userResponse.data };
-          })
-        );
-
-        const userDetailsMap = userResult.reduce((acc, { id_user, user }) => {
-          acc[id_user] = user;
-          return acc;
-        }, {});
-
-        setUserDetails(userDetailsMap);
-
         const totalScore = ratingResponse.reduce(
-          (sum, rating) => sum + rating.rating,
+          (sum, rating) => sum + rating.ratings,
           0
         );
         const avgRating =
@@ -137,7 +123,10 @@ const DashboardPenyewa = () => {
                 </b>
               </div>
               <div className="flex mr-28">
-                <Link to={`/penyewa/penilaian/${dataKost.id}`} className="flex justify-center my-4 mx-12">
+                <Link
+                  to={`/penyewa/penilaian/${dataKost.id}`}
+                  className="flex justify-center my-4 mx-12"
+                >
                   <p className="text-black mx-3 text-xl">Nilai</p>
                   <i className="fa-solid fa-chevron-right fa-xl my-4 text-black"></i>
                 </Link>
@@ -150,11 +139,11 @@ const DashboardPenyewa = () => {
                     <img className="w-10 h-fit" src={logoUser} alt="" />
                     <div className="mx-8 my-2 text-black">
                       <b className="text-xl">
-                        {userDetails[rating.id_user]?.name || "User"}
+                        {rating.penyewa?.name || "User"}
                       </b>
                       <div className="flex mt-2">
                         <img className="w-5 h-fit" src={blackStar} alt="" />
-                        <p className="mx-2 text-black">{rating.rating}</p>
+                        <p className="mx-2 text-black">{rating.ratings}</p>
                       </div>
                       <p>{rating.comment}</p>
                     </div>

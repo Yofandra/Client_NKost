@@ -66,7 +66,7 @@ const NavbarPenyewa = () => {
           <div className="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16 z-20">
             <p className="flex justify-center py-8 bg-slate-300 rounded-lg">{userName}</p>
             <Link
-              to={"/pemilik/dashboard"}
+              to={"/profile"}
               className="block px-4 py-2 account-link text-black hover:text-white"
             >
               Profile

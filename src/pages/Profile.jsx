@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
+import api from "../axios/api";
+import Swal from "../utils/sweetAlert";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState({
-    fullName: "",
-    username: "",
-    email: "",
-    phoneNumber: "",
-    address: "",
-    password: "",
-    confirmPassword: "",
-    profilePicture: "",
-  });
-  const [error, setError] = useState("");
+  const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/profile");
-        const data = await response.json();
-        setUserData(data);
+        const response = await api.get("/profile/user", { headers });
+        if (response.status === 200) {
+          setUserData(response.data.data);
+        } else {
+          throw new Error("Failed to fetch user data");
+        }
       } catch (error) {
-        setError("Failed to fetch user data");
+        Swal.fire({
+          title: "Failed to fetch user data",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     };
 
@@ -38,107 +43,108 @@ const UserProfile = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (userData.password !== userData.confirmPassword) {
-      setError("Password dan konfirmasi password tidak cocok");
-      return;
-    }
 
     try {
-      const response = await fetch("http://localhost:5173/profile", {
-        method: "PUT",
+      const response = await api.put("/profile/update", userData, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(userData),
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("Failed to update profile");
       }
 
-      const data = await response.json();
-      setUserData(data);
+      setUserData(response.data);
       setIsEditing(false);
+
+      Swal.fire({
+        title: "Profile Updated Successfully",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
-      setError(error.message);
+      Swal.fire({
+        title: "Failed to update profile",
+        text: error.response?.data?.message || "Terjadi kesalahan",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
+  const handleBackClick = () => {
+    if(userData.role === "admin") {
+      navigate("/admin/data-user");
+    } else if(userData.role === "pemilik") {
+      navigate("/pemilik/dashboard");
+    } else {
+      navigate("/penyewa/dashboard");
+    }
+  }
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center bg-orange-400 min-h-screen w-full p-4 md:p-8">
+    <div className="flex flex-col md:flex-row items-center justify-center bg-orange-400 min-h-screen w-full p-4 md:p-8 text-black">
+      <button onClick={(handleBackClick)} className="absolute top-[20px] left-[20px] flex items-center bg-transparent">
+        <i className="fa-solid fa-chevron-left my-4 text-black"></i>
+        <p className="text-black mx-3 ">Kembali</p>
+      </button>
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-4 md:mx-8">
-        <div className="flex flex-col items-center">
-          <img
-            src={userData.profilePicture || "/src/assets/images/default.png"}
-            alt="Profile"
-            className="w-32 h-32 rounded-full mb-4"
-          />
-          <h2 className="text-2xl font-bold mb-2">{userData.fullName}</h2>
-          <p className="text-gray-600">{userData.email}</p>
-          <p className="text-gray-600">{userData.phoneNumber}</p>
-          <p className="text-gray-600">{userData.address}</p>
-        </div>
+        <h2 className="text-2xl font-bold mb-6 text-center text-orange-500">
+          Profile
+        </h2>
+        {userData ? (
+          <div className="flex flex-col ">
+            <p className="text-gray-600">Name: {userData.name}</p>
+            <p className="text-gray-600">Email: {userData.email}</p>
+            <p className="text-gray-600">Password: *******</p>
+            <p className="text-gray-600">Role: {userData.role}</p>
+          </div>
+        ) : (
+          <p className="text-gray-600">Loading...</p>
+        )}
       </div>
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-4 md:mx-8">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-4 md:mx-8 text-white">
         <h2 className="text-2xl font-bold mb-6 text-center text-orange-500">
           {isEditing ? "Edit Profile" : "Profile"}
         </h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
         {isEditing ? (
           <form onSubmit={handleSave}>
+            <label className="text-black font-bold">Name:</label>
             <input
               type="text"
-              name="fullName"
+              name="name"
               placeholder="Nama Lengkap"
-              value={userData.fullName}
+              value={userData?.name || ""}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg mb-4"
             />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={userData.username}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg mb-4"
-            />
+            <label className="text-black font-bold">Email:</label>
             <input
               type="email"
               name="email"
               placeholder="Email"
-              value={userData.email}
+              value={userData?.email || ""}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg mb-4"
             />
-            <input
-              type="text"
-              name="phoneNumber"
-              placeholder="Nomor Handphone"
-              value={userData.phoneNumber}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg mb-4"
-            />
-            <input
-              type="text"
-              name="address"
-              placeholder="Alamat"
-              value={userData.address}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg mb-4"
-            />
+            <label className="text-black font-bold">Password:</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              value={userData.password}
+              value={userData?.password || ""}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg mb-4"
             />
+            <label className="text-black font-bold">Role:</label>
             <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Konfirmasi Password"
-              value={userData.confirmPassword}
+              type="text"
+              name="role"
+              placeholder="Role"
+              value={userData?.role || ""}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg mb-4"
             />
