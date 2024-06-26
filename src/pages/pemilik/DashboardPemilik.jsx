@@ -3,6 +3,7 @@ import SidebarPemilik from "../../components/SidebarPemilik";
 import NavbarPemilik from "../../components/NavbarPemilik";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../axios/api";
+import Swal from "../../utils/sweetAlert";
 
 const DashboardPemilik = () => {
     const [kosts, setKosts] = useState([]);
@@ -42,6 +43,43 @@ const DashboardPemilik = () => {
 
     const handleLocationClick = (id) => {
         navigate(`/pemilik/detail-lokasi/${id}`);
+    };
+
+    const handleDeleteClick = (id) => {
+        Swal.fire({
+            title: 'Anda yakin?',
+            text: "Anda tidak akan bisa mengembalikan data yang dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const token = localStorage.getItem('token');
+                api.delete(`/kost/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(response => {
+                    console.log('Delete response:', response);
+                    fetchData();
+                    Swal.fire(
+                        'Dihapus!',
+                        'Data telah dihapus.',
+                        'success'
+                    );
+                }).catch(error => {
+                    console.error('Error deleting data:', error);
+                    Swal.fire(
+                        'Gagal!',
+                        'Data gagal dihapus.',
+                        'error'
+                    );
+                });
+            }
+        });
     };
 
     return (
@@ -98,7 +136,7 @@ const DashboardPemilik = () => {
                                                 </td>
                                                 <td className="py-4 px-6 border-b border-grey-light">
                                                     <button onClick={(e) => { e.stopPropagation(); handleEditClick(item.id); }} className="bg-[#F39200] w-12 p-0 mr-2 font-bold">Edit</button>
-                                                    <button className="bg-[#F39200] w-16 p-0 font-bold">Hapus</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); handleDeleteClick(item.id); }} className="bg-[#F39200] w-16 p-0 font-bold">Hapus</button>
                                                 </td>
                                             </tr>
                                         ))}
