@@ -52,7 +52,7 @@ function App() {
         <Route path="/pemilik/edit-kamar/:id" element={<EditKamar />} />
         <Route path="/pemilik/laporan" element={<Laporan />} />
         <Route path="/pemilik/daftar-kost-penilaian" element={<DaftarKostPenilaian />} />
-        <Route path="/pemilik/penilaian" element={<Penilaian />} />
+        <Route path="/pemilik/penilaian/:id" element={<Penilaian />} />
         <Route path="/pemilik/permintaan-kamar" element={<PermintaanKamar />} />
       </Routes>
   );
