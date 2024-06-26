@@ -53,12 +53,12 @@ function App() {
         <Route path="/pemilik/detail-lokasi/:id" element={<DetailLokasi />} />
         <Route path="/pemilik/kelola-kamar/:id" element={<KelolaKamar />} />
         <Route path="/pemilik/daftar-kost-kamar" element={<DaftarKostKamar />} />
-        <Route path="/pemilik/tambah-kamar" element={<TambahKamar />} />
+        <Route path="/pemilik/tambah-kamar/:id" element={<TambahKamar />} />
         <Route path="/pemilik/detail-kamar/:id" element={<DetailKamar />} />
         <Route path="/pemilik/edit-kamar/:id" element={<EditKamar />} />
         <Route path="/pemilik/laporan" element={<Laporan />} />
         <Route path="/pemilik/daftar-kost-penilaian" element={<DaftarKostPenilaian />} />
-        <Route path="/pemilik/penilaian" element={<Penilaian />} />
+        <Route path="/pemilik/penilaian/:id" element={<Penilaian />} />
         <Route path="/pemilik/permintaan-kamar" element={<PermintaanKamar />} />
         <Route path="/admin/data-user" element={<DataUser />} />
         <Route path="/admin/data-kost" element={<DataKost />} />
