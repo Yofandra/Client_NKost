@@ -18,7 +18,7 @@ const KelolaKamar = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setRooms(response.data);
+                setRooms(response.data || []);
             } catch (error) {
                 if (error.response && error.response.status === 401) {
                     localStorage.removeItem('token');
@@ -51,7 +51,7 @@ const KelolaKamar = () => {
                             <i className="fa-solid fa-arrow-left fa-2x mb-4 "></i>
                         </Link>
                         <h1 className="text-3xl text-black pb-6 font-bold">Kelola Kamar</h1>
-                        <Link to={"/pemilik/tambah-kamar"}>
+                        <Link to={`/pemilik/tambah-kamar/${id}`}>
                             <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                                 <i className="fas fa-plus mr-3"></i> Tambah Kamar
                             </button>
@@ -71,7 +71,7 @@ const KelolaKamar = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {rooms.map(room => (
+                                        {Array.isArray(rooms) && rooms.map(room => (
                                             <tr key={room.id} onClick={() => handleDetailClick(room.id)} className="hover:bg-grey-lighter ">
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.id}</td>
                                                 <td className="py-4 px-6 border-b border-grey-light">{room.num_room}</td>
