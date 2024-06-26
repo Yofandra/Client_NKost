@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../axios/api";
 import Swal from "../utils/sweetAlert";
+import imageRegister from "../assets/images/1.png";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const RegisterForm = () => {
       </div>
       <div className="mt-8 md:mt-0 md:ml-8 w-full max-w-md mx-4 md:mx-8">
         <img
-          src="/src/assets/images/1.png"
+          src={imageRegister}
           alt="Gambar 1"
           className="w-full h-auto rounded-lg"
         />
